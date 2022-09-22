@@ -3,3 +3,7 @@
 ```
 npx react-native init WanAndroid
 ```
+
+```
+yarn add xxx --save-dev
+```
