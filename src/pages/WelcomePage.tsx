@@ -2,7 +2,15 @@ import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default class WelcomePage extends Component {
+interface IState {
+  timer: number;
+}
+
+export default class WelcomePage extends Component<IState> {
+  state = {
+    timer: 0,
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -14,8 +22,14 @@ export default class WelcomePage extends Component {
   componentDidMount() {
     // do stuff while splash screen is shown
     // After having done stuff (such as async tasks) hide the splash screen
+    this.state.timer = window.setTimeout(() => {
+      SplashScreen.hide();
+    }, 2000);
+    console.log('2秒后关闭闪屏');
+  }
 
-    SplashScreen.hide();
+  componentWillUnmount() {
+    this.state.timer && window.clearTimeout(this.state.timer);
   }
 }
 
