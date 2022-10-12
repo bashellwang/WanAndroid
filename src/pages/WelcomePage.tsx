@@ -24,8 +24,8 @@ export default class WelcomePage extends Component<IState> {
     // After having done stuff (such as async tasks) hide the splash screen
     this.state.timer = window.setTimeout(() => {
       SplashScreen.hide();
-    }, 2000);
-    console.log('2秒后关闭闪屏');
+    }, 1000);
+    console.log('1秒后关闭闪屏');
   }
 
   componentWillUnmount() {
