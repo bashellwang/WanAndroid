@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
 interface IState {
   timer: number;
 }
 
 export default class WelcomePage extends Component<IState> {
+  private navigation: any;
+
+  constructor(props) {
+    super(props);
+    this.navigation = props.navigation;
+  }
+
   state = {
     timer: 0,
   };
@@ -15,6 +22,10 @@ export default class WelcomePage extends Component<IState> {
     return (
       <View style={styles.container}>
         <Text>Welcome </Text>
+        <Button
+          title="Go Home"
+          onPress={() => this.navigation.navigate('Home')}
+        />
       </View>
     );
   }
@@ -23,9 +34,9 @@ export default class WelcomePage extends Component<IState> {
     // do stuff while splash screen is shown
     // After having done stuff (such as async tasks) hide the splash screen
     this.state.timer = window.setTimeout(() => {
+      console.log('1秒后关闭闪屏');
       SplashScreen.hide();
     }, 1000);
-    console.log('1秒后关闭闪屏');
   }
 
   componentWillUnmount() {
