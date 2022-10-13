@@ -32,3 +32,19 @@ https://reactnavigation.org/docs/getting-started/
 - You can update the screen's params with navigation.setParams
 - Initial params can be passed via the initialParams prop on Screen
 - Params should contain the minimal data required to show a screen, nothing more
+
+#### https://reactnavigation.org/docs/headers
+- You can customize the header inside of the options prop of your screen components. Read the full list of options in the API reference.
+- The options prop can be an object or a function. When it is a function, it is provided with an object with the navigation and route prop.
+- You can also specify shared screenOptions in the stack navigator configuration when you initialize it. The prop takes precedence over that configuration.
+
+#### https://reactnavigation.org/docs/header-buttons
+- You can set buttons in the header through the headerLeft and headerRight properties in options.
+- The back button is fully customizable with headerLeft, but if you just want to change the title or image, there are other options for that — headerBackTitle, headerBackTitleStyle, and headerBackImageSource.
+- You can use a callback for the options prop to access navigation and route objects.
+
+#### https://reactnavigation.org/docs/navigation-lifecycle
+- While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the navigation prop.
+- You may also use the useFocusEffect or useIsFocused hooks.
+
+

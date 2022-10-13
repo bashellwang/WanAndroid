@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import HomePage from './src/pages/HomePage';
 import WelcomePage from './src/pages/WelcomePage';
+import {Button} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,17 @@ export default function App() {
         <Stack.Screen
           name="Welcome"
           component={WelcomePage}
-          options={{title: 'Welcome'}}
+          options={{
+            title: 'Welcome',
+            headerShown: false,
+            headerRight: () => (
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Info"
+                color="#000"
+              />
+            ),
+          }}
         />
         <Stack.Screen name="Home" component={HomePage} />
       </Stack.Navigator>
