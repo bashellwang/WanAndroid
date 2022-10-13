@@ -24,7 +24,12 @@ export default class WelcomePage extends Component<IState> {
         <Text>Welcome </Text>
         <Button
           title="Go Home"
-          onPress={() => this.navigation.navigate('Home')}
+          onPress={() =>
+            this.navigation.navigate('Home', {
+              name: 'jack',
+              age: 18,
+            })
+          }
         />
       </View>
     );
