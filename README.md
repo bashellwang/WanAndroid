@@ -43,6 +43,15 @@ https://reactnavigation.org/docs/getting-started/
 - The back button is fully customizable with headerLeft, but if you just want to change the title or image, there are other options for that — headerBackTitle, headerBackTitleStyle, and headerBackImageSource.
 - You can use a callback for the options prop to access navigation and route objects.
 
+#### https://reactnavigation.org/docs/nesting-navigators
+- Each navigator keeps its own navigation history
+- Each navigator has its own options
+- Each screen in a navigator has its own params
+- Navigation actions are handled by current navigator and bubble up if couldn't be handled
+- Navigator specific methods are available in the navigators nested inside
+- Nested navigators don't receive parent's events
+- Parent navigator's UI is rendered on top of child navigator
+
 #### https://reactnavigation.org/docs/navigation-lifecycle
 - While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the navigation prop.
 - You may also use the useFocusEffect or useIsFocused hooks.

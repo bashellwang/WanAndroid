@@ -25,7 +25,7 @@ export default class WelcomePage extends Component<IState> {
         <Button
           title="Go Home"
           onPress={() =>
-            this.navigation.navigate('Home', {
+            this.navigation.navigate('HomeNavigator', {
               name: 'jack',
               age: 18,
             })
@@ -41,7 +41,7 @@ export default class WelcomePage extends Component<IState> {
     this.state.timer = window.setTimeout(() => {
       console.log('1秒后关闭闪屏');
       SplashScreen.hide();
-    }, 1000);
+    }, 100);
   }
 
   componentWillUnmount() {

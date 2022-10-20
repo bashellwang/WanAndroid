@@ -2,9 +2,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import HomePage from './pages/HomePage';
 import WelcomePage from './pages/WelcomePage';
-import {Button} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ProjectPage from './pages/ProjectPage';
+import ResourcePage from './pages/ResourcePage';
+import MePage from './pages/MePage';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 //https://reactnavigation.org/docs/hello-react-navigation
 /**
@@ -19,28 +23,67 @@ const Stack = createNativeStackNavigator();
  *      screenOptions to Stack.Navigator
  */
 
+function HomeNavigator() {
+  return (
+    <Tab.Navigator initialRouteName="HomePage">
+      <Tab.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{
+          title: 'Home',
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="ProjectPage"
+        component={ProjectPage}
+        options={{
+          title: 'Project',
+          headerShown: true,
+        }}
+      />
+      <Tab.Screen
+        name="ResourcePage"
+        component={ResourcePage}
+        options={{
+          title: 'Resource',
+          headerShown: true,
+        }}
+      />
+      <Tab.Screen
+        name="MePage"
+        component={MePage}
+        options={{
+          title: 'Me',
+          headerShown: true,
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
-      {/* initialRouteName 表示默认第一个路由页面*/}
-      <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen
-          name="Welcome"
-          component={WelcomePage}
-          options={{
-            title: 'Welcome',
-            headerShown: false,
-            headerRight: () => (
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Info"
-                color="#000"
-              />
-            ),
-          }}
-        />
-        <Stack.Screen name="Home" component={HomePage} />
-      </Stack.Navigator>
+      {
+        <Stack.Navigator initialRouteName="WelcomePage">
+          <Stack.Screen
+            name="WelcomePage"
+            component={WelcomePage}
+            options={{
+              title: 'Welcome',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="HomeNavigator"
+            component={HomeNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      }
     </NavigationContainer>
   );
 }
