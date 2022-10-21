@@ -6,6 +6,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProjectPage from './pages/ProjectPage';
 import ResourcePage from './pages/ResourcePage';
 import MePage from './pages/MePage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Constants from './foundation/Constants';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,9 +27,9 @@ const Tab = createBottomTabNavigator();
 
 function HomeNavigator() {
   return (
-    <Tab.Navigator initialRouteName="HomePage">
+    <Tab.Navigator initialRouteName={Constants.Pages.HomePage}>
       <Tab.Screen
-        name="HomePage"
+        name={Constants.Pages.HomePage}
         component={HomePage}
         options={{
           title: 'Home',
@@ -35,7 +37,7 @@ function HomeNavigator() {
         }}
       />
       <Tab.Screen
-        name="ProjectPage"
+        name={Constants.Pages.ProjectPage}
         component={ProjectPage}
         options={{
           title: 'Project',
@@ -43,7 +45,7 @@ function HomeNavigator() {
         }}
       />
       <Tab.Screen
-        name="ResourcePage"
+        name={Constants.Pages.ResourcePage}
         component={ResourcePage}
         options={{
           title: 'Resource',
@@ -51,7 +53,7 @@ function HomeNavigator() {
         }}
       />
       <Tab.Screen
-        name="MePage"
+        name={Constants.Pages.MePage}
         component={MePage}
         options={{
           title: 'Me',
@@ -66,9 +68,9 @@ export default function App() {
   return (
     <NavigationContainer>
       {
-        <Stack.Navigator initialRouteName="WelcomePage">
+        <Stack.Navigator initialRouteName={Constants.Pages.WelcomePage}>
           <Stack.Screen
-            name="WelcomePage"
+            name={Constants.Pages.WelcomePage}
             component={WelcomePage}
             options={{
               title: 'Welcome',
@@ -76,7 +78,7 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="HomeNavigator"
+            name={Constants.Navigators.HomeNavigator}
             component={HomeNavigator}
             options={{
               headerShown: false,
