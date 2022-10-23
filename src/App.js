@@ -6,8 +6,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProjectPage from './pages/ProjectPage';
 import ResourcePage from './pages/ResourcePage';
 import MePage from './pages/MePage';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Constants from './foundation/Constants';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,11 +27,38 @@ const Tab = createBottomTabNavigator();
 
 function HomeNavigator() {
   return (
-    <Tab.Navigator initialRouteName={Constants.Pages.HomePage}>
+    <Tab.Navigator
+      initialRouteName={Constants.Pages.HomePage}
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName = 'logo-react';
+          if (route.name === Constants.Pages.HomePage) {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === Constants.Pages.ProjectPage) {
+            iconName = focused ? 'list' : 'list-outline';
+          } else if (route.name === Constants.Pages.ResourcePage) {
+            iconName = focused ? 'book' : 'book-outline';
+          } else if (route.name === Constants.Pages.MePage) {
+            iconName = focused ? 'person' : 'person-outline';
+          }
+
+          // You can return any component that you like here!
+          return (
+            <Icon
+              name={iconName}
+              size={focused ? size + 5 : size}
+              color={color}
+            />
+          );
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+      })}>
       <Tab.Screen
         name={Constants.Pages.HomePage}
         component={HomePage}
         options={{
+          tabBarLabel: '首页',
           title: 'Home',
           headerShown: false,
         }}
@@ -40,6 +67,7 @@ function HomeNavigator() {
         name={Constants.Pages.ProjectPage}
         component={ProjectPage}
         options={{
+          tabBarLabel: '项目',
           title: 'Project',
           headerShown: true,
         }}
@@ -48,6 +76,7 @@ function HomeNavigator() {
         name={Constants.Pages.ResourcePage}
         component={ResourcePage}
         options={{
+          tabBarLabel: '资源',
           title: 'Resource',
           headerShown: true,
         }}
@@ -56,6 +85,7 @@ function HomeNavigator() {
         name={Constants.Pages.MePage}
         component={MePage}
         options={{
+          tabBarLabel: '我',
           title: 'Me',
           headerShown: true,
         }}

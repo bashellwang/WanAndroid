@@ -57,3 +57,6 @@ https://reactnavigation.org/docs/getting-started/
 - You may also use the useFocusEffect or useIsFocused hooks.
 
 
+### react-native-vector-icons
+https://github.com/oblador/react-native-vector-icons
+
