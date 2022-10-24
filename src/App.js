@@ -8,9 +8,13 @@ import ResourcePage from './pages/ResourcePage';
 import MePage from './pages/MePage';
 import Constants from './foundation/Constants';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import RecommendPage from './pages/RecommendPage';
+import TopicPage from './pages/TopicPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const Top = createMaterialTopTabNavigator();
 
 //https://reactnavigation.org/docs/hello-react-navigation
 /**
@@ -25,14 +29,13 @@ const Tab = createBottomTabNavigator();
  *      screenOptions to Stack.Navigator
  */
 
-function HomeNavigator() {
+function AppBottomTabsNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName={Constants.Pages.HomePage}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName = 'logo-react';
-          if (route.name === Constants.Pages.HomePage) {
+          if (route.name === Constants.Navigators.HomePageTopTabsNavigator) {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === Constants.Pages.ProjectPage) {
             iconName = focused ? 'list' : 'list-outline';
@@ -55,8 +58,8 @@ function HomeNavigator() {
         tabBarInactiveTintColor: 'gray',
       })}>
       <Tab.Screen
-        name={Constants.Pages.HomePage}
-        component={HomePage}
+        name={Constants.Navigators.HomePageTopTabsNavigator}
+        component={HomePageTopTabsNavigator}
         options={{
           tabBarLabel: '首页',
           title: 'Home',
@@ -94,6 +97,47 @@ function HomeNavigator() {
   );
 }
 
+function HomePageTopTabsNavigator() {
+  return (
+    <Top.Navigator
+      screenOptions={{
+        lazy: true, //屏幕懒加载
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+        tabBarIndicatorStyle: {
+          display: false,
+          height: 2,
+          backgroundColor: 'tomato',
+        },
+        tabBarStyle: {
+          marginTop: 50,
+          height: 50,
+        },
+      }}>
+      <Top.Screen
+        name={Constants.Pages.RecommendPage}
+        component={RecommendPage}
+        navig
+        options={{
+          tabBarLabel: '推荐',
+          title: 'Recommend',
+          headerShown: true,
+        }}
+      />
+      <Top.Screen
+        name={Constants.Pages.TopicPage}
+        component={TopicPage}
+        navig
+        options={{
+          tabBarLabel: '专题',
+          title: 'Topic',
+          headerShown: true,
+        }}
+      />
+    </Top.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -108,8 +152,8 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name={Constants.Navigators.HomeNavigator}
-            component={HomeNavigator}
+            name={Constants.Navigators.AppBottomTabsNavigator}
+            component={AppBottomTabsNavigator}
             options={{
               headerShown: false,
             }}

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {Button, StyleSheet, Text, View} from 'react-native';
+import Constants from '../foundation/Constants';
 
 interface IState {
   timer: number;
@@ -25,10 +26,9 @@ export default class WelcomePage extends Component<IState> {
         <Button
           title="Go Home"
           onPress={() =>
-            this.navigation.navigate('HomeNavigator', {
-              name: 'jack',
-              age: 18,
-            })
+            this.navigation.navigate(
+              Constants.Navigators.AppBottomTabsNavigator,
+            )
           }
         />
       </View>

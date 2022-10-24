@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import Constants from '../foundation/Constants';
 
 export default class HomePage extends Component<any, any> {
   private navigation: any;
@@ -12,16 +13,20 @@ export default class HomePage extends Component<any, any> {
     this.route = props.route;
   }
 
-  componentDidMount() {
-    SplashScreen.hide();
-  }
+  // componentDidMount() {
+  //   SplashScreen.hide();
+  // }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.font}>Home</Text>
         <Button
           title="Go Home"
-          onPress={() => this.navigation.navigate('HomeNavigator')}
+          onPress={() =>
+            this.navigation.navigate(
+              Constants.Navigators.HomePageTopTabsNavigator,
+            )
+          }
         />
       </View>
     );

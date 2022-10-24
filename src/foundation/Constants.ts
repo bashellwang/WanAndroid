@@ -23,7 +23,13 @@ export default {
     ProjectPage: 'ProjectPage',
     ResourcePage: 'ResourcePage',
     MePage: 'MePage',
+    RecommendPage: 'RecommendPage',
+    TopicPage: 'TopicPage',
   },
-  Navigators: {HomeNavigator: 'HomeNavigator'},
+  Navigators: {
+    // HomeNavigator: 'HomeNavigator',
+    AppBottomTabsNavigator: 'AppBottomTabsNavigator',
+    HomePageTopTabsNavigator: 'HomePageTopTabsNavigator',
+  },
   Colors: {},
 };
