@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import RecommendPage from './pages/RecommendPage';
 import TopicPage from './pages/TopicPage';
+import Themes from './foundation/Themes';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,8 +55,8 @@ function AppBottomTabsNavigator() {
             />
           );
         },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
+        // tabBarActiveTintColor: 'tomato',
+        // tabBarInactiveTintColor: 'gray',
       })}>
       <Tab.Screen
         name={Constants.Navigators.HomePageTopTabsNavigator}
@@ -102,12 +103,12 @@ function HomePageTopTabsNavigator() {
     <Top.Navigator
       screenOptions={{
         lazy: true, //屏幕懒加载
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
+        // tabBarActiveTintColor: 'tomato',
+        // tabBarInactiveTintColor: 'gray',
         tabBarIndicatorStyle: {
           display: false,
           height: 2,
-          backgroundColor: 'tomato',
+          // backgroundColor: 'tomato',
         },
         tabBarStyle: {
           marginTop: 50,
@@ -140,7 +141,7 @@ function HomePageTopTabsNavigator() {
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={Themes.GreenTheme}>
       {
         <Stack.Navigator initialRouteName={Constants.Pages.WelcomePage}>
           <Stack.Screen
