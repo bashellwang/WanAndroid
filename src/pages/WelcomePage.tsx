@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, StyleSheet, Text, View} from 'react-native';
 import Constants from '../foundation/Constants';
-
 interface IState {
   timer: number;
 }
@@ -22,15 +21,12 @@ export default class WelcomePage extends Component<IState> {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome </Text>
-        <Button
-          title="Go Home"
-          onPress={() =>
-            this.navigation.navigate(
-              Constants.Navigators.AppBottomTabsNavigator,
-            )
-          }
-        />
+        {/*<Image*/}
+        {/*  // style={{flex: 1}}*/}
+        {/*  resizeMode="cover"*/}
+        {/*  source={require('../../android/app/src/main/res/drawable/launch_screen.png')}*/}
+        {/*  style={{width: 400, height: 240}}*/}
+        {/*/>*/}
       </View>
     );
   }
@@ -41,7 +37,8 @@ export default class WelcomePage extends Component<IState> {
     this.state.timer = window.setTimeout(() => {
       console.log('1秒后关闭闪屏');
       SplashScreen.hide();
-    }, 100);
+      this.navigation.navigate(Constants.Navigators.AppBottomTabsNavigator);
+    }, 0);
   }
 
   componentWillUnmount() {
@@ -51,6 +48,7 @@ export default class WelcomePage extends Component<IState> {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'transparent',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
