@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import Constants from '../foundation/Constants';
+import Constants from '../../foundation/Constants';
 
 export default class HomePage extends Component<any, any> {
   private navigation: any;

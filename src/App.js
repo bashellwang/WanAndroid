@@ -1,17 +1,26 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/home/HomePage';
 import WelcomePage from './pages/WelcomePage';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ProjectPage from './pages/ProjectPage';
-import ResourcePage from './pages/ResourcePage';
-import MePage from './pages/MePage';
+import ProjectPage from './pages/project/ProjectPage';
+import ResourcePage from './pages/resource/ResourcePage';
+import MePage from './pages/me/MePage';
 import Constants from './foundation/Constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import RecommendPage from './pages/RecommendPage';
-import TopicPage from './pages/TopicPage';
+import RecommendPage from './pages/home/RecommendPage';
+import TopicPage from './pages/home/TopicPage';
 import Themes from './foundation/Themes';
+import PopularBlogPage from './pages/home/PopularBlogPage';
+import DailyQuestionPage from './pages/home/DailyQuestionPage';
+import PerformanceOptimizationPage from './pages/home/PerformanceOptimizationPage';
+import FrameworkPage from './pages/home/FrameworkPage';
+import SourceCodePage from './pages/home/SourceCodePage';
+import BigFactorySharePage from './pages/home/BigFactorySharePage';
+import InterviewRelatedPage from './pages/home/InterviewRelatedPage';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import {Platform, PlatformIOSStatic} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -106,33 +115,146 @@ function HomePageTopTabsNavigator() {
         // tabBarActiveTintColor: 'tomato',
         // tabBarInactiveTintColor: 'gray',
         tabBarIndicatorStyle: {
-          display: false,
           height: 2,
           // backgroundColor: 'tomato',
         },
         tabBarStyle: {
-          marginTop: 50,
+          marginTop: Platform.OS === 'ios' ? 50 : 0,
           height: 50,
         },
       }}>
       <Top.Screen
-        name={Constants.Pages.RecommendPage}
-        component={RecommendPage}
-        navig
+        name={Constants.Navigators.RecommendPageTopTabsNavigator}
+        component={RecommendPageTopTabsNavigator}
         options={{
           tabBarLabel: '推荐',
           title: 'Recommend',
-          headerShown: true,
         }}
       />
       <Top.Screen
-        name={Constants.Pages.TopicPage}
-        component={TopicPage}
-        navig
+        name={Constants.Navigators.TopicPageTopTabsNavigator}
+        component={TopicPageTopTabsNavigator}
         options={{
           tabBarLabel: '专题',
           title: 'Topic',
-          headerShown: true,
+        }}
+      />
+    </Top.Navigator>
+  );
+}
+
+function RecommendPageTopTabsNavigator() {
+  return (
+    <Top.Navigator
+      screenOptions={{
+        lazy: true, //屏幕懒加载
+
+        // tab 中文本样式
+        tabBarLabelStyle: {
+          fontsize: 20,
+          fontWeight: '200',
+          // color: 'red',
+          // backgroundColor: 'green',
+        },
+        // tab 中下滑指示线样式
+        tabBarIndicatorStyle: {
+          height: 2,
+          width: 40,
+          left: 75,
+          // backgroundColor: 'blue',
+        },
+        // ----------下面三个样式优先级逐渐升高-------------
+        // tabbar 布局样式
+        tabBarStyle: {
+          // backgroundColor: 'orange',
+          // justifyContent: true, //默认为false
+        },
+        // tab 中内容所在布局容器的样式
+        tabBarContentContainerStyle: {
+          // backgroundColor: 'purple',
+          // justifyContent: true, //默认为true
+        },
+        tabBarItemStyle: {
+          // backgroundColor: 'black',
+          // justifyContent: true, //默认为true
+        },
+        // ----------上面三个样式优先级逐渐升高-------------
+      }}>
+      <Top.Screen
+        name={Constants.Pages.PopularBlogPage}
+        component={PopularBlogPage}
+        options={{
+          tabBarLabel: '热门博文',
+        }}
+      />
+      <Top.Screen
+        name={Constants.Pages.DailyQuestionPage}
+        component={DailyQuestionPage}
+        options={{
+          tabBarLabel: '每日一问',
+        }}
+      />
+    </Top.Navigator>
+  );
+}
+
+function TopicPageTopTabsNavigator() {
+  return (
+    <Top.Navigator
+      screenOptions={{
+        lazy: true, //屏幕懒加载
+
+        // tab 中文本样式
+        tabBarLabelStyle: {
+          fontsize: 10,
+          fontWeight: '200',
+          textTransform: 'capitalize',
+        },
+        // tab 中下滑指示线样式
+        tabBarIndicatorStyle: {
+          height: 2,
+          width: 40,
+          left: 60,
+        },
+        // 当一屏显示不下时，需要左右进行滑动，当它为true时，需要设置 tabBarItemStyle 做样式调整
+        tabBarScrollEnabled: true,
+        tabBarItemStyle: {
+          minWidth: 120,
+        },
+      }}>
+      <Top.Screen
+        name={Constants.Pages.InterviewRelatedPage}
+        component={InterviewRelatedPage}
+        options={{
+          tabBarLabel: '面试相关',
+        }}
+      />
+      <Top.Screen
+        name={Constants.Pages.PerformanceOptimizationPage}
+        component={PerformanceOptimizationPage}
+        options={{
+          tabBarLabel: '性能优化',
+        }}
+      />
+      <Top.Screen
+        name={Constants.Pages.FrameworkPage}
+        component={FrameworkPage}
+        options={{
+          tabBarLabel: 'framework',
+        }}
+      />
+      <Top.Screen
+        name={Constants.Pages.SourceCodePage}
+        component={SourceCodePage}
+        options={{
+          tabBarLabel: '开源库源码',
+        }}
+      />
+      <Top.Screen
+        name={Constants.Pages.BigFactorySharePage}
+        component={BigFactorySharePage}
+        options={{
+          tabBarLabel: '大厂分享',
         }}
       />
     </Top.Navigator>
