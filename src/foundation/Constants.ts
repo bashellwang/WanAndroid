@@ -25,7 +25,7 @@ export default {
     MePage: 'MePage',
     RecommendPage: 'RecommendPage',
     TopicPage: 'TopicPage',
-    PopularBlogPage: 'PopularBlogPage',
+    TopArticlesPage: 'TopArticlesPage',
     DailyQuestionPage: 'DailyQuestionPage',
     InterviewRelatedPage: 'InterviewRelatedPage',
     PerformanceOptimizationPage: 'PerformanceOptimizationPage',

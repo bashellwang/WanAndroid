@@ -12,7 +12,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import RecommendPage from './pages/home/RecommendPage';
 import TopicPage from './pages/home/TopicPage';
 import Themes from './foundation/Themes';
-import PopularBlogPage from './pages/home/PopularBlogPage';
+import TopArticlesPage from './pages/home/TopArticlesPage';
 import DailyQuestionPage from './pages/home/DailyQuestionPage';
 import PerformanceOptimizationPage from './pages/home/PerformanceOptimizationPage';
 import FrameworkPage from './pages/home/FrameworkPage';
@@ -181,8 +181,8 @@ function RecommendPageTopTabsNavigator() {
         // ----------上面三个样式优先级逐渐升高-------------
       }}>
       <Top.Screen
-        name={Constants.Pages.PopularBlogPage}
-        component={PopularBlogPage}
+        name={Constants.Pages.TopArticlesPage}
+        component={TopArticlesPage}
         options={{
           tabBarLabel: '热门博文',
         }}
