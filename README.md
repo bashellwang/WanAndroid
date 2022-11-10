@@ -81,3 +81,12 @@ https://reactnavigation.org/docs/getting-started/
 - github 仓库: https://github.com/oblador/react-native-vector-icons
 - ionicons 图片库: https://ionic.io/ionicons
 
+
+
+### 调试
+https://www.jianshu.com/p/89df53f91edd
+
+- 进入菜单项：adb shell input keyevent 82
+- Ctrl+M 即可（Android上有快捷键冲突， 需自行调整）
+- 手机上摇一摇
+
