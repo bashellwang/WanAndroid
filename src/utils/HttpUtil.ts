@@ -1,4 +1,5 @@
 const TAG = '[NetWork] ';
+
 function request(
   method: string,
   url: string,
@@ -27,16 +28,18 @@ function request(
     // 给 body 塞入请求参数
     requestConfig = Object.assign(requestConfig, {
       body: {
-        value: JSON.stringify(params),
+        value: JSON.stringify(params, null, 2),
       },
     });
   }
-  console.log(TAG + 'request params: ' + JSON.stringify(requestConfig));
+  console.log(
+    TAG + 'request params: ' + JSON.stringify(requestConfig, null, 2),
+  );
 
   return new Promise((resolve, reject) => {
     fetch(url, requestConfig)
       .then(response => {
-        console.log(TAG + 'response: ' + JSON.stringify(response));
+        console.log(TAG + 'response: ' + JSON.stringify(response, null, 2));
         return response.json();
       })
       .then(responObj => {

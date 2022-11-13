@@ -90,3 +90,7 @@ https://www.jianshu.com/p/89df53f91edd
 - Ctrl+M 即可（Android上有快捷键冲突， 需自行调整）
 - 手机上摇一摇
 
+### RN 布局样式
+https://reactnative.cn/docs/flexbox
+https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+

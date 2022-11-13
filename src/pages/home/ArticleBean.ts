@@ -8,6 +8,7 @@ export interface ArticleBean {
   apkLink: string;
   audit: number;
   canEdit: boolean;
+  author: string;
   chapterId: number;
   chapterName: string;
   collect: boolean;

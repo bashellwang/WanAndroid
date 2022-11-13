@@ -10,8 +10,9 @@ import {
 import {API_URLS} from '../../foundation/Apis';
 import HttpUtil from '../../utils/HttpUtil';
 import {useCallback, useEffect, useState} from 'react';
-import {ArticleBean} from './ArticleBean';
+import {ArticleBean, ArticleTag} from './ArticleBean';
 import ApiResponse from '../../foundation/ApiResponse';
+import OutlineText, {OutlineTextColorTheme} from '../../components/OutlineText';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -58,7 +59,7 @@ export default function TopArticlesPage() {
   }, [_refreshData]);
 
   return (
-    <View style={style.container}>
+    <View style={pageStyle.container}>
       <FlatList
         data={articleList}
         renderItem={data => _renderItem(data)}
@@ -111,17 +112,17 @@ export default function TopArticlesPage() {
   function _renderFooter() {
     if (showFoot === FOOT_STATUS.NO_MORE) {
       return (
-        <View style={style.footer}>
+        <View style={pageStyle.footer}>
           <Text style={{color: 'red'}}>没有更多数据...</Text>
         </View>
       );
     } else if (showFoot === FOOT_STATUS.IS_LOADING_MORE) {
       return (
-        <View style={style.footer}>
+        <View style={pageStyle.footer}>
           <ActivityIndicator
             size="small"
             animating={true}
-            style={style.indicator}
+            style={pageStyle.indicator}
             color={'red'}
           />
 
@@ -138,37 +139,65 @@ export default function TopArticlesPage() {
   function _renderItem(data) {
     // let result = JSON.parse(data?.item);
     let article: ArticleBean = data?.item as ArticleBean;
-    console.log(article);
+    console.log('_renderItem:' + JSON.stringify(article, null, 2));
     return (
-      <View style={style.item}>
-        {article && (
-          <View>
-            <Text style={style.text}>{article.publishTime}</Text>
-            <Text style={style.text}>{article.superChapterName}</Text>
-            <Text style={style.text}>{JSON.stringify(article.tags[0])}</Text>
-          </View>
-        )}
-      </View>
+      article && (
+        <View style={pageStyle.item.container}>
+          <Text style={pageStyle.item.title} numberOfLines={1}>
+            {article.title}
+          </Text>
+          <Text style={pageStyle.item.content} numberOfLines={3}>
+            {article.desc}
+          </Text>
+          <Text style={pageStyle.item.text}>{article.author}</Text>
+          <Text style={pageStyle.item.label}>
+            {(article.tags[0] as ArticleTag).name}
+          </Text>
+          <OutlineText
+            colorTheme={OutlineTextColorTheme.green}
+            text={'公众号'}
+          />
+        </View>
+      )
     );
   }
 }
 
-const style = StyleSheet.create({
+const pageStyle = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 5,
   },
   item: {
-    height: 100,
-    backgroundColor: 'grey',
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
-    alignItems: 'center', //布局对齐方式
-    justifyContent: 'center', //内容居中
+    container: {
+      padding: 5,
+      backgroundColor: '#969494FF',
+      marginLeft: 5,
+      marginRight: 5,
+      marginBottom: 10,
+      justifyContent: 'flex-start', //内容居中
+      alignItems: 'flex-start', //布局对齐方式
+    },
+    title: {
+      color: 'black',
+      fontSize: 16,
+      // fontWeight: 'bold',
+    },
+    content: {
+      paddingTop: 5,
+      paddingBottom: 5,
+      color: 'black',
+      fontSize: 12,
+    },
+    label: {
+      marginTop: 5,
+      color: 'orange',
+      fontSize: 10,
+    },
   },
   text: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
   },
   indicatorContainer: {
     alignItems: 'center',
