@@ -10,9 +10,9 @@ import {
 import {API_URLS} from '../../foundation/Apis';
 import HttpUtil from '../../utils/HttpUtil';
 import {useCallback, useEffect, useState} from 'react';
-import {ArticleBean, ArticleTag} from './ArticleBean';
+import {ArticleBean} from './ArticleBean';
 import ApiResponse from '../../foundation/ApiResponse';
-import OutlineText, {OutlineTextColorTheme} from '../../components/OutlineText';
+import ArticleInfoCard from '../../components/ArticleInfoCard';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -140,26 +140,7 @@ export default function TopArticlesPage() {
     // let result = JSON.parse(data?.item);
     let article: ArticleBean = data?.item as ArticleBean;
     console.log('_renderItem:' + JSON.stringify(article, null, 2));
-    return (
-      article && (
-        <View style={pageStyle.item.container}>
-          <Text style={pageStyle.item.title} numberOfLines={1}>
-            {article.title}
-          </Text>
-          <Text style={pageStyle.item.content} numberOfLines={3}>
-            {article.desc}
-          </Text>
-          <Text style={pageStyle.item.text}>{article.author}</Text>
-          <Text style={pageStyle.item.label}>
-            {(article.tags[0] as ArticleTag).name}
-          </Text>
-          <OutlineText
-            colorTheme={OutlineTextColorTheme.green}
-            text={'公众号'}
-          />
-        </View>
-      )
-    );
+    return article && <ArticleInfoCard item={article} />;
   }
 }
 
