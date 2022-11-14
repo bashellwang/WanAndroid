@@ -14,6 +14,8 @@ interface OutlineTextProps {
   fontSize?: number;
   justifyContent?: string;
   alignItems?: string;
+  marginLeft?: number;
+  marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
   borderWidth?: number;

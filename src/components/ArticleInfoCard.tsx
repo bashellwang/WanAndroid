@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {ArticleBean, ArticleTag} from '../pages/home/ArticleBean';
-import OutlineText, {OutlineTextColorTheme} from './OutlineText';
 import {View, StyleSheet, Text} from 'react-native';
+import OutlineTextList from './OutlineTextList';
 
 const ArticleInfoCardColor = {
   dark_black: '#2e3135',
@@ -31,30 +31,17 @@ export default function ArticleInfoCard(props: ArticleInfoCardProps): FC {
         <Text style={pageStyle.item.content}>{article.desc}</Text>
       )}
       <Text style={pageStyle.item.text}>{article.author}</Text>
-      <Text style={pageStyle.item.label}>
-        {(article.tags[0] as ArticleTag).name}
-      </Text>
-      <OutlineText colorTheme={OutlineTextColorTheme.green} text={'公众号'} />
       {_renderTags(article.tags)}
     </View>
   );
 }
 
 function _renderTags(items: ArticleTag[]) {
-  let length: number = items.length as number;
-  if (length > 0) {
-    return (
-      <View style={{marginTop: 5}}>
-        <OutlineText
-          colorTheme={OutlineTextColorTheme.green}
-          text={items[0].name}
-        />
-      </View>
-    );
-  } else {
-    console.debug(TAG + '_renderTags, no tags...');
-    return null;
-  }
+  let tagNameList: string[];
+  tagNameList = items.map(item => {
+    return item.name;
+  });
+  return <OutlineTextList textList={tagNameList} />;
 }
 
 const pageStyle = StyleSheet.create({
