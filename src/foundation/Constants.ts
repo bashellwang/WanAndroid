@@ -32,6 +32,7 @@ export default {
     FrameworkPage: 'FrameworkPage',
     SourceCodePage: 'SourceCodePage',
     BigFactorySharePage: 'BigFactorySharePage',
+    ArticleDetailPage: 'ArticleDetailPage',
   },
   Navigators: {
     // HomeNavigator: 'HomeNavigator',

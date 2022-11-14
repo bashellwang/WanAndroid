@@ -5,6 +5,7 @@ import {
   RefreshControl,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {API_URLS} from '../../foundation/Apis';
@@ -13,6 +14,7 @@ import {useCallback, useEffect, useState} from 'react';
 import {ArticleBean} from './ArticleBean';
 import ApiResponse from '../../foundation/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
+import Constants from '../../foundation/Constants';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -22,7 +24,7 @@ const FOOT_STATUS = {
 
 const initData: ArticleBean[] = null;
 
-export default function TopArticlesPage() {
+export default function TopArticlesPage({navigation}) {
   const [articleList, setArticleList] = useState(initData);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -148,7 +150,22 @@ export default function TopArticlesPage() {
     // let result = JSON.parse(data?.item);
     let article: ArticleBean = data?.item as ArticleBean;
     console.log('_renderItem:' + JSON.stringify(article, null, 2));
-    return article && <ArticleInfoCard item={article} />;
+    if (article) {
+      return (
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => {
+            navigation.navigate(Constants.Pages.ArticleDetailPage, {
+              title: article.title,
+              url: article.link,
+            });
+          }}>
+          <ArticleInfoCard item={article} />
+        </TouchableOpacity>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
