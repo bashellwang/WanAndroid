@@ -8,7 +8,7 @@ export const OutlineTextColorTheme = {
   blue: '#207ab6',
 };
 
-interface OutlineTextProps {
+export interface OutlineTextProps {
   colorTheme?: string;
   text?: string;
   fontSize?: number;

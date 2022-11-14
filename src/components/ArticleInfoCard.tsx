@@ -2,7 +2,8 @@ import * as React from 'react';
 import {FC} from 'react';
 import {ArticleBean, ArticleTag} from '../pages/home/ArticleBean';
 import {View, StyleSheet, Text} from 'react-native';
-import OutlineTextList from './OutlineTextList';
+import OutlineTextList, {ItemInfo} from './OutlineTextList';
+import OutlineText, {OutlineTextColorTheme} from './OutlineText';
 
 const ArticleInfoCardColor = {
   dark_black: '#2e3135',
@@ -27,21 +28,40 @@ export default function ArticleInfoCard(props: ArticleInfoCardProps): FC {
         <Text style={pageStyle.item.content} numberOfLines={3}>
           {article.desc}
         </Text>
-      ) : (
-        <Text style={pageStyle.item.content}>{article.desc}</Text>
-      )}
-      <Text style={pageStyle.item.text}>{article.author}</Text>
-      {_renderTags(article.tags)}
+      ) : null}
+      <Text style={pageStyle.item.label} numberOfLines={1}>
+        分类:{article.superChapterName}/{article.chapterName}
+      </Text>
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <Text style={pageStyle.item.label}>作者:{article.author}</Text>
+        <Text style={pageStyle.item.label}>时间:{article.niceDate}</Text>
+      </View>
+
+      {_renderTags(article)}
     </View>
   );
 }
 
-function _renderTags(items: ArticleTag[]) {
-  let tagNameList: string[];
-  tagNameList = items.map(item => {
-    return item.name;
+function _renderTags(article: ArticleBean) {
+  let tagList: ArticleTag[] = article.tags;
+  let wrapData: ItemInfo[] = tagList.map(item => {
+    return {text: item.name, color: OutlineTextColorTheme.green};
   });
-  return <OutlineTextList textList={tagNameList} />;
+  let targetData: ItemInfo[];
+  if (article.isTop) {
+    targetData = [
+      {text: '置顶', color: OutlineTextColorTheme.red},
+      ...wrapData,
+    ];
+  } else {
+    targetData = wrapData;
+  }
+  return <OutlineTextList dataList={targetData} />;
 }
 
 const pageStyle = StyleSheet.create({
@@ -56,8 +76,8 @@ const pageStyle = StyleSheet.create({
       marginLeft: 5,
       marginRight: 5,
       marginBottom: 10,
-      justifyContent: 'flex-start', //内容居中
-      alignItems: 'flex-start', //布局对齐方式
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
     },
     title: {
       color: ArticleInfoCardColor.dark_black,
@@ -72,7 +92,6 @@ const pageStyle = StyleSheet.create({
     },
     label: {
       marginTop: 5,
-      marginBottom: 5,
       color: ArticleInfoCardColor.light_black,
       fontSize: 10,
     },

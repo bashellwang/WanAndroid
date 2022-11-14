@@ -39,4 +39,5 @@ export interface ArticleBean {
   userId: number;
   visible: number;
   zan: number;
+  isTop: boolean; //手动添加，非后台接口返回，默认false
 }

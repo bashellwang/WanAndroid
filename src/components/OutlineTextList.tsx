@@ -1,15 +1,21 @@
 import {FC} from 'react';
 import * as React from 'react';
-import OutlineText, {OutlineTextColorTheme} from './OutlineText';
+import OutlineText from './OutlineText';
 import {View} from 'react-native';
 
-interface ListProps {
-  textList?: string[];
+export interface ItemInfo {
+  text: string;
+  color?: string;
+}
+
+export interface OutlineTextListProps {
+  dataList: ItemInfo[];
 }
 
 const TAG = '[OutlineTextList] ';
-export default function OutlineTextList(props: ListProps): FC {
-  let strList: string[] = props.textList as string[];
+export default function OutlineTextList(props: OutlineTextListProps): FC {
+  let dataList: ItemInfo[] = props.dataList as ItemInfo[];
+
   // let targetProps = Object.assign({}, defaultProps, props);
   return (
     <View
@@ -20,15 +26,15 @@ export default function OutlineTextList(props: ListProps): FC {
         alignItems: 'flex-start',
         marginTop: 5,
       }}>
-      {strList.map((str, index) => {
+      {dataList.map((itemInfo, index) => {
         let marginLeftValue: number;
         if (index > 0) {
           marginLeftValue = 5;
         }
         return (
           <OutlineText
-            text={str}
-            colorTheme={OutlineTextColorTheme.red}
+            text={itemInfo.text}
+            colorTheme={itemInfo.color}
             marginLeft={marginLeftValue}
           />
         );

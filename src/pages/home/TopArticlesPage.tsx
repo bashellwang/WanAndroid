@@ -43,6 +43,10 @@ export default function TopArticlesPage() {
         console.debug('msg: ' + rsp.errorMsg);
         console.debug('content: ' + rsp.data);
         let dataArray: ArticleBean[] = rsp.data as ArticleBean[];
+        dataArray.map(data => {
+          // 从置顶接口里返回的，全部设置为true
+          data.isTop = true;
+        });
         setArticleList(dataArray);
         setIsRefreshing(false);
       },
@@ -99,6 +103,10 @@ export default function TopArticlesPage() {
         setIsLoadingMore(false);
         setShowFoot(FOOT_STATUS.NO_MORE);
         let result: ArticleBean[] = articleList.concat(dataArray);
+        result.map(data => {
+          // 从置顶接口里返回的，全部设置为true
+          data.isTop = true;
+        });
         setArticleList(result);
       },
       function (error) {
