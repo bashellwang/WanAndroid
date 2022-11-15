@@ -1,10 +1,17 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import GeneralFlatList from '../../components/GeneralFlatList';
+import {ArticleBean} from './ArticleBean';
+import Constants from '../../foundation/Constants';
 
-export default function DailyQuestionPage() {
+export default function DailyQuestionPage({navigation}) {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>DailyQuestionPage!</Text>
-    </View>
+    <GeneralFlatList
+      onClick={(data: ArticleBean) => {
+        navigation.navigate(Constants.Pages.ArticleDetailPage, {
+          title: data.title,
+          url: data.link,
+        });
+      }}
+    />
   );
 }
