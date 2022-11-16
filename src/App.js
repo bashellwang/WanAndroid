@@ -23,6 +23,9 @@ import BigFactorySharePage from './pages/home/BigFactorySharePage';
 import InterviewRelatedPage from './pages/home/InterviewRelatedPage';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {Platform, PlatformIOSStatic} from 'react-native';
+import DebugPage from './debug/DebugPage';
+import {useEffect} from 'react';
+import TopArticlesDemoPage from './debug/TopArticlesDemoPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -109,7 +112,14 @@ function AppBottomTabsNavigator() {
   );
 }
 
-function HomePageTopTabsNavigator() {
+function HomePageTopTabsNavigator({navigation}) {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('tabLongPress', e => {
+      navigation.navigate(Constants.Debug.DebugPage);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
   return (
     <Top.Navigator
       screenOptions={{
@@ -297,6 +307,20 @@ export default function App() {
           <Stack.Screen
             name={Constants.Pages.WebPage}
             component={WebPage}
+            options={{
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name={Constants.Debug.DebugPage}
+            component={DebugPage}
+            options={{
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name={Constants.Debug.TopArticlesDemoPage}
+            component={TopArticlesDemoPage}
             options={{
               headerShown: true,
             }}

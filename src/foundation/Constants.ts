@@ -35,6 +35,11 @@ export default {
     ArticleDetailPage: 'ArticleDetailPage',
     WebPage: 'WebPage',
   },
+  // 调试模块
+  Debug: {
+    DebugPage: 'DebugPage',
+    TopArticlesDemoPage: 'TopArticlesDemoPage',
+  },
   Navigators: {
     // HomeNavigator: 'HomeNavigator',
     AppBottomTabsNavigator: 'AppBottomTabsNavigator',

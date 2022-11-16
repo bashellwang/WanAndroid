@@ -1,9 +1,9 @@
 import * as React from 'react';
-import GeneralFlatListDemo from '../../debug/GeneralFlatListDemo';
-import {ArticleBean} from './ArticleBean';
-import Constants from '../../foundation/Constants';
+import {ArticleBean} from '../pages/home/ArticleBean';
+import Constants from '../foundation/Constants';
+import GeneralFlatListDemo from './GeneralFlatListDemo';
 
-export default function DailyQuestionPage({navigation}) {
+export default function TopArticlesDemoPage({navigation}) {
   return (
     <GeneralFlatListDemo
       onClick={(data: ArticleBean) => {

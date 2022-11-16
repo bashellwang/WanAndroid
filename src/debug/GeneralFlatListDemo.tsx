@@ -13,7 +13,7 @@ import HttpUtil from '../utils/HttpUtil';
 import {API_URLS} from '../foundation/Apis';
 import ApiResponse from '../foundation/ApiResponse';
 import {ArticleBean} from '../pages/home/ArticleBean';
-import ArticleInfoCard from './ArticleInfoCard';
+import ArticleInfoCard from '../components/ArticleInfoCard';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -21,17 +21,18 @@ const FOOT_STATUS = {
   IS_LOADING_MORE: 2,
 };
 
-interface GeneralFlatListProps {
+interface GeneralFlatListDemoProps {
   onClick?: (data: any) => void;
 }
 
 /**
- * TODO 暂不可使用
- * @constructor
- * @param props
+ * 所有逻辑和 UI 在一个组件中，一个组件即可成为一个页面。
+ * 灵活性和扩展性不高，demo 试试
  */
 
-export default function GeneralFlatList(props: GeneralFlatListProps): React.FC {
+export default function GeneralFlatListDemo(
+  props: GeneralFlatListDemoProps,
+): React.FC {
   const [articleList, setArticleList] = useState(null);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
