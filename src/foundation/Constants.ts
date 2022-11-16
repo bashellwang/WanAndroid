@@ -33,6 +33,7 @@ export default {
     SourceCodePage: 'SourceCodePage',
     BigFactorySharePage: 'BigFactorySharePage',
     ArticleDetailPage: 'ArticleDetailPage',
+    WebPage: 'WebPage',
   },
   Navigators: {
     // HomeNavigator: 'HomeNavigator',

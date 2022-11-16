@@ -12,6 +12,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import RecommendPage from './pages/home/RecommendPage';
 import TopicPage from './pages/home/TopicPage';
 import ArticleDetailPage from './pages/home/ArticleDetailPage';
+import WebPage from './pages/WebPage';
 import Themes from './foundation/Themes';
 import TopArticlesPage from './pages/home/TopArticlesPage';
 import DailyQuestionPage from './pages/home/DailyQuestionPage';
@@ -289,6 +290,13 @@ export default function App() {
           <Stack.Screen
             name={Constants.Pages.ArticleDetailPage}
             component={ArticleDetailPage}
+            options={{
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name={Constants.Pages.WebPage}
+            component={WebPage}
             options={{
               headerShown: true,
             }}

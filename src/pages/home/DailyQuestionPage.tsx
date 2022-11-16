@@ -7,7 +7,7 @@ export default function DailyQuestionPage({navigation}) {
   return (
     <GeneralFlatList
       onClick={(data: ArticleBean) => {
-        navigation.navigate(Constants.Pages.ArticleDetailPage, {
+        navigation.navigate(Constants.Pages.WebPage, {
           title: data.title,
           url: data.link,
         });

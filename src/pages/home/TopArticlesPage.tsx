@@ -155,7 +155,7 @@ export default function TopArticlesPage({navigation}) {
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => {
-            navigation.navigate(Constants.Pages.ArticleDetailPage, {
+            navigation.navigate(Constants.Pages.WebPage, {
               title: article.title,
               url: article.link,
             });
