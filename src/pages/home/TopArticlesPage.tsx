@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Apis} from '../../foundation/Apis';
+import {ApiUrl} from '../../foundation/ApiUrl';
 import HttpUtil from '../../utils/HttpUtil';
 import {useCallback, useEffect, useState} from 'react';
 import {ArticleInfo} from '../../model/ArticleInfo';
@@ -39,7 +39,7 @@ export default function TopArticlesPage({navigation}) {
     }
     setIsRefreshing(true);
 
-    HttpUtil.sendGet(Apis.getTopArticleList()).then(
+    HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
@@ -96,7 +96,7 @@ export default function TopArticlesPage({navigation}) {
     setIsLoadingMore(true);
     setShowFoot(FOOT_STATUS.IS_LOADING_MORE);
 
-    HttpUtil.sendGet(Apis.getTopArticleList()).then(
+    HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);

@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://www.wanandroid.com';
 
-export class Apis {
+export class ApiUrl {
   /**
    * 置顶文章列表
    */

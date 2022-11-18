@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useCallback, useEffect, useState} from 'react';
 import HttpUtil from '../utils/HttpUtil';
-import {Apis} from '../foundation/Apis';
+import {ApiUrl} from '../foundation/ApiUrl';
 import ApiResponse from '../foundation/ApiResponse';
 import {ArticleInfo} from '../model/ArticleInfo';
 import ArticleInfoCard from '../components/ArticleInfoCard';
@@ -46,7 +46,7 @@ export default function GeneralFlatListDemo(
     }
     setIsRefreshing(true);
 
-    HttpUtil.sendGet(Apis.getTopArticleList()).then(
+    HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
@@ -129,7 +129,7 @@ export default function GeneralFlatListDemo(
     setIsLoadingMore(true);
     setShowFoot(FOOT_STATUS.IS_LOADING_MORE);
 
-    HttpUtil.sendGet(Apis.getTopArticleList()).then(
+    HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);

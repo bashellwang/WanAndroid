@@ -4,7 +4,7 @@ import Constants from '../../foundation/Constants';
 import GeneralFlatList from '../../components/GeneralFlatList';
 import {useCallback, useEffect, useState} from 'react';
 import HttpUtil from '../../utils/HttpUtil';
-import {Apis} from '../../foundation/Apis';
+import {ApiUrl} from '../../foundation/ApiUrl';
 import ApiResponse from '../../foundation/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
 import {
@@ -38,7 +38,7 @@ export default function DailyQuestionPage({navigation}) {
     setIsRefreshing(true);
 
     let req: WendaReq = {pageId: 2};
-    HttpUtil.sendGet(Apis.getWendaArticleList(req.pageId)).then(
+    HttpUtil.sendGet(ApiUrl.getWendaArticleList(req.pageId)).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
@@ -109,7 +109,7 @@ export default function DailyQuestionPage({navigation}) {
     setIsLoadingMore(true);
     setShowFoot(FOOT_STATUS.IS_LOADING_MORE);
 
-    HttpUtil.sendGet(Apis.getWendaArticleList(2)).then(
+    HttpUtil.sendGet(ApiUrl.getWendaArticleList(2)).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
