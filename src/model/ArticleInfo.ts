@@ -3,7 +3,7 @@ export interface ArticleTag {
   url: string;
 }
 
-export interface ArticleBean {
+export interface ArticleInfo {
   adminAdd: boolean;
   apkLink: string;
   audit: number;

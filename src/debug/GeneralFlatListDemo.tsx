@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 import {useCallback, useEffect, useState} from 'react';
 import HttpUtil from '../utils/HttpUtil';
-import {API_URLS} from '../foundation/Apis';
+import {Apis} from '../foundation/Apis';
 import ApiResponse from '../foundation/ApiResponse';
-import {ArticleBean} from '../pages/home/ArticleBean';
+import {ArticleInfo} from '../model/ArticleInfo';
 import ArticleInfoCard from '../components/ArticleInfoCard';
 
 const FOOT_STATUS = {
@@ -46,12 +46,12 @@ export default function GeneralFlatListDemo(
     }
     setIsRefreshing(true);
 
-    HttpUtil.sendGet(API_URLS.TOP_ARTICLE_LIST).then(
+    HttpUtil.sendGet(Apis.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
         console.debug('content: ' + rsp.data);
-        let dataArray: ArticleBean[] = rsp.data as ArticleBean[];
+        let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         dataArray.map(data => {
           // 从置顶接口里返回的，全部设置为true
           data.isTop = true;
@@ -129,15 +129,15 @@ export default function GeneralFlatListDemo(
     setIsLoadingMore(true);
     setShowFoot(FOOT_STATUS.IS_LOADING_MORE);
 
-    HttpUtil.sendGet(API_URLS.TOP_ARTICLE_LIST).then(
+    HttpUtil.sendGet(Apis.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
         console.debug('content: ' + rsp.data);
-        let dataArray: ArticleBean[] = rsp.data as ArticleBean[];
+        let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         setIsLoadingMore(false);
         setShowFoot(FOOT_STATUS.NO_MORE);
-        let result: ArticleBean[] = articleList.concat(dataArray);
+        let result: ArticleInfo[] = articleList.concat(dataArray);
         result.map(data => {
           // 从置顶接口里返回的，全部设置为true
           data.isTop = true;
@@ -154,7 +154,7 @@ export default function GeneralFlatListDemo(
 
   function _renderItem(data) {
     // let result = JSON.parse(data?.item);
-    let article: ArticleBean = data?.item as ArticleBean;
+    let article: ArticleInfo = data?.item as ArticleInfo;
     console.log('_renderItem:' + JSON.stringify(article, null, 2));
     if (article) {
       return (

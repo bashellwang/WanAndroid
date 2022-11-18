@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {ArticleBean, ArticleTag} from '../pages/home/ArticleBean';
+import {ArticleInfo, ArticleTag} from '../model/ArticleInfo';
 import {View, StyleSheet, Text} from 'react-native';
 import OutlineTextList, {ItemInfo} from './OutlineTextList';
 import OutlineText, {OutlineTextColorTheme} from './OutlineText';
@@ -13,11 +13,11 @@ const ArticleInfoCardColor = {
 const TAG = '[ArticleInfoCard] ';
 
 interface ArticleInfoCardProps {
-  item: ArticleBean;
+  item: ArticleInfo;
 }
 
 export default function ArticleInfoCard(props: ArticleInfoCardProps): FC {
-  let article: ArticleBean = props.item as ArticleBean;
+  let article: ArticleInfo = props.item as ArticleInfo;
 
   return (
     <View style={pageStyle.item.container}>
@@ -47,7 +47,7 @@ export default function ArticleInfoCard(props: ArticleInfoCardProps): FC {
   );
 }
 
-function _renderTags(article: ArticleBean) {
+function _renderTags(article: ArticleInfo) {
   let tagList: ArticleTag[] = article.tags;
   let wrapData: ItemInfo[] = tagList.map(item => {
     return {text: item.name, color: OutlineTextColorTheme.green};

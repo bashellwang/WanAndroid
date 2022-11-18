@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {API_URLS} from '../../foundation/Apis';
+import {Apis} from '../../foundation/Apis';
 import HttpUtil from '../../utils/HttpUtil';
 import {useCallback, useEffect, useState} from 'react';
-import {ArticleBean} from './ArticleBean';
+import {ArticleInfo} from '../../model/ArticleInfo';
 import ApiResponse from '../../foundation/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
 import Constants from '../../foundation/Constants';
@@ -22,7 +22,7 @@ const FOOT_STATUS = {
   IS_LOADING_MORE: 2,
 };
 
-const initData: ArticleBean[] = null;
+const initData: ArticleInfo[] = null;
 
 export default function TopArticlesPage({navigation}) {
   const [articleList, setArticleList] = useState(initData);
@@ -39,12 +39,12 @@ export default function TopArticlesPage({navigation}) {
     }
     setIsRefreshing(true);
 
-    HttpUtil.sendGet(API_URLS.TOP_ARTICLE_LIST).then(
+    HttpUtil.sendGet(Apis.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
         console.debug('content: ' + rsp.data);
-        let dataArray: ArticleBean[] = rsp.data as ArticleBean[];
+        let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         dataArray.map(data => {
           // 从置顶接口里返回的，全部设置为true
           data.isTop = true;
@@ -96,15 +96,15 @@ export default function TopArticlesPage({navigation}) {
     setIsLoadingMore(true);
     setShowFoot(FOOT_STATUS.IS_LOADING_MORE);
 
-    HttpUtil.sendGet(API_URLS.TOP_ARTICLE_LIST).then(
+    HttpUtil.sendGet(Apis.getTopArticleList()).then(
       function (rsp: ApiResponse) {
         console.debug('code: ' + rsp.errorCode);
         console.debug('msg: ' + rsp.errorMsg);
         console.debug('content: ' + rsp.data);
-        let dataArray: ArticleBean[] = rsp.data as ArticleBean[];
+        let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         setIsLoadingMore(false);
         setShowFoot(FOOT_STATUS.NO_MORE);
-        let result: ArticleBean[] = articleList.concat(dataArray);
+        let result: ArticleInfo[] = articleList.concat(dataArray);
         result.map(data => {
           // 从置顶接口里返回的，全部设置为true
           data.isTop = true;
@@ -148,7 +148,7 @@ export default function TopArticlesPage({navigation}) {
 
   function _renderItem(data) {
     // let result = JSON.parse(data?.item);
-    let article: ArticleBean = data?.item as ArticleBean;
+    let article: ArticleInfo = data?.item as ArticleInfo;
     console.log('_renderItem:' + JSON.stringify(article, null, 2));
     if (article) {
       return (
