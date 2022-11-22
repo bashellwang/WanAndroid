@@ -22,3 +22,28 @@ A:
 R: https://stackoverflow.com/questions/55840294/how-to-fix-missing-dependency-warning-when-using-useeffect-react-hook
 
 ```
+
+```
+Q: typescript deconstruction a data except some field
+A: 
+let source = {
+    x: 120,
+    y: 200,
+    z: 150,
+    radius: 10,
+    color: 'red',
+};
+let result = (({ x, y, z }) => ({ x, y, z }))(source);
+
+或者
+
+let user = {name : "Ram", age: 20, salary: '20K', job : "Tester" }; 
+let { name, age, ...details } = user; 
+name; // Ram 
+age; // 20 
+details; // {salary: '20K', job : 'Tester'}; 
+
+R: 
+https://stackoverflow.com/questions/51340819/elegant-way-to-copy-only-a-part-of-an-object/51340842#51340842
+https://www.51cto.com/article/618100.html
+```

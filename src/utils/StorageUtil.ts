@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const TAG = '[Storage] ';
+import LogUtil from './LogUtil';
+const TAG = 'Storage';
 const saveValue = async (
   key: string,
   value: string,
@@ -12,7 +13,7 @@ const saveValue = async (
     }
   } catch (e) {
     let err = new Error(e as string);
-    console.log(TAG + 'err: ' + err);
+    LogUtil.error({tag: TAG}, 'err: ' + err);
     if (callback) {
       callback(err);
     }
@@ -33,7 +34,7 @@ const getValue = async (
     return result;
   } catch (e) {
     let err = new Error(e as string);
-    console.log(TAG + 'err: ' + err);
+    LogUtil.error({tag: TAG}, 'err: ' + err);
     if (callback) {
       callback(err, null);
     }
@@ -52,7 +53,7 @@ const deleteValue = async (
     }
   } catch (e) {
     let err = new Error(e as string);
-    console.log(TAG + 'err: ' + err);
+    LogUtil.error({tag: TAG}, 'err: ' + err);
     if (callback) {
       callback(err);
     }

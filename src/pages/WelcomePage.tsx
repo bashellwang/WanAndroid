@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
 import Constants from '../foundation/Constants';
+import LogUtil from '../utils/LogUtil';
 interface IState {
   timer: number;
 }
+
+const TAG = 'WelcomePage';
 
 export default class WelcomePage extends Component<IState> {
   private navigation: any;
@@ -35,7 +38,7 @@ export default class WelcomePage extends Component<IState> {
     // do stuff while splash screen is shown
     // After having done stuff (such as async tasks) hide the splash screen
     this.state.timer = window.setTimeout(() => {
-      console.log('1秒后关闭闪屏');
+      LogUtil.debug({tag: TAG}, '1秒后关闭闪屏');
       SplashScreen.hide();
       this.navigation.navigate(Constants.Navigators.AppBottomTabsNavigator);
     }, 0);

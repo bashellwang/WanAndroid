@@ -14,6 +14,7 @@ import {ApiUrl} from '../foundation/ApiUrl';
 import ApiResponse from '../foundation/ApiResponse';
 import {ArticleInfo} from '../model/ArticleInfo';
 import ArticleInfoCard from '../components/ArticleInfoCard';
+import LogUtil from '../utils/LogUtil';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -24,12 +25,11 @@ const FOOT_STATUS = {
 interface GeneralFlatListDemoProps {
   onClick?: (data: any) => void;
 }
-
+const TAG = 'GeneralFlatListDemo';
 /**
  * 所有逻辑和 UI 在一个组件中，一个组件即可成为一个页面。
  * 灵活性和扩展性不高，demo 试试
  */
-
 export default function GeneralFlatListDemo(
   props: GeneralFlatListDemoProps,
 ): React.FC {
@@ -41,16 +41,16 @@ export default function GeneralFlatListDemo(
 
   const _refreshData = useCallback(() => {
     if (isRefreshing) {
-      console.debug('is refreshing data, return...');
+      LogUtil.debug({tag: TAG}, 'is refreshing data, return...');
       return;
     }
     setIsRefreshing(true);
 
     HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
-        console.debug('code: ' + rsp.errorCode);
-        console.debug('msg: ' + rsp.errorMsg);
-        console.debug('content: ' + rsp.data);
+        LogUtil.debug({tag: TAG}, 'code: ' + rsp.errorCode);
+        LogUtil.debug({tag: TAG}, 'msg: ' + rsp.errorMsg);
+        LogUtil.debug({tag: TAG}, 'content: ' + rsp.data);
         let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         dataArray.map(data => {
           // 从置顶接口里返回的，全部设置为true
@@ -60,7 +60,7 @@ export default function GeneralFlatListDemo(
         setIsRefreshing(false);
       },
       function (error) {
-        console.error('error: ' + error);
+        LogUtil.error({tag: TAG}, 'error: ' + error);
         setIsRefreshing(false);
       },
     );
@@ -123,7 +123,7 @@ export default function GeneralFlatListDemo(
 
   function _loadMoreData() {
     if (isLoadingMore) {
-      console.debug('is loading more data, return...');
+      LogUtil.debug({tag: TAG}, 'is loading more data, return...');
       return;
     }
     setIsLoadingMore(true);
@@ -131,9 +131,9 @@ export default function GeneralFlatListDemo(
 
     HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
-        console.debug('code: ' + rsp.errorCode);
-        console.debug('msg: ' + rsp.errorMsg);
-        console.debug('content: ' + rsp.data);
+        LogUtil.debug({tag: TAG}, 'code: ' + rsp.errorCode);
+        LogUtil.debug({tag: TAG}, 'msg: ' + rsp.errorMsg);
+        LogUtil.debug({tag: TAG}, 'content: ' + rsp.data);
         let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         setIsLoadingMore(false);
         setShowFoot(FOOT_STATUS.NO_MORE);
@@ -145,7 +145,7 @@ export default function GeneralFlatListDemo(
         setArticleList(result);
       },
       function (error) {
-        console.error('error: ' + error);
+        LogUtil.error({tag: TAG}, 'error: ' + error);
         setIsLoadingMore(false);
         setShowFoot(FOOT_STATUS.HIDE);
       },
@@ -155,7 +155,10 @@ export default function GeneralFlatListDemo(
   function _renderItem(data) {
     // let result = JSON.parse(data?.item);
     let article: ArticleInfo = data?.item as ArticleInfo;
-    console.log('_renderItem:' + JSON.stringify(article, null, 2));
+    LogUtil.debug(
+      {tag: TAG},
+      '_renderItem:' + JSON.stringify(article, null, 2),
+    );
     if (article) {
       return (
         <TouchableOpacity

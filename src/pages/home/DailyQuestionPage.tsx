@@ -16,6 +16,8 @@ import {
 } from 'react-native';
 import {WendaResp} from '../../model/WendaResp';
 import {WendaReq} from '../../model/WendaReq';
+import Themes from '../../foundation/Themes';
+import LogUtil from '../../utils/LogUtil';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -23,32 +25,41 @@ const FOOT_STATUS = {
   IS_LOADING_MORE: 2,
 };
 
+const TAG = 'DailyQuestionPage';
 export default function DailyQuestionPage({navigation}) {
   const [articleList, setArticleList] = useState(null);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [showFoot, setShowFoot] = useState(FOOT_STATUS.HIDE);
+  const [footStatus, setFootStatus] = useState(FOOT_STATUS.HIDE);
 
   const _refreshData = useCallback(() => {
     if (isRefreshing) {
-      console.debug('is refreshing data, return...');
+      LogUtil.debug({tag: TAG}, 'is refreshing data, return...');
       return;
     }
     setIsRefreshing(true);
 
-    let req: WendaReq = {pageId: 2};
-    HttpUtil.sendGet(ApiUrl.getWendaArticleList(req.pageId)).then(
+    HttpUtil.sendGet(ApiUrl.getWendaArticleList()).then(
       function (rsp: ApiResponse) {
-        console.debug('code: ' + rsp.errorCode);
-        console.debug('msg: ' + rsp.errorMsg);
-        console.debug('content: ' + rsp.data);
         let wendaResp: WendaResp = rsp.data as WendaResp;
+        let simpleRsp = (({curPage, offset, over, pageCount, size, total}) => ({
+          curPage,
+          offset,
+          over,
+          pageCount,
+          size,
+          total,
+        }))(wendaResp);
+        LogUtil.debug(
+          {tag: TAG},
+          '_refreshData, wendaResp: ' + JSON.stringify(simpleRsp, null, 2),
+        );
         setArticleList(wendaResp.datas);
         setIsRefreshing(false);
       },
       function (error) {
-        console.error('error: ' + error);
+        LogUtil.error({tag: TAG}, 'error: ' + error);
         setIsRefreshing(false);
       },
     );
@@ -75,26 +86,30 @@ export default function DailyQuestionPage({navigation}) {
   );
 
   function _renderFooter() {
-    if (showFoot === FOOT_STATUS.NO_MORE) {
+    if (footStatus === FOOT_STATUS.NO_MORE) {
       return (
         <View style={style.footer}>
-          <Text style={{color: 'red'}}>没有更多数据...</Text>
+          <Text style={{color: Themes.GreenTheme.colors.primary}}>
+            没有更多数据...
+          </Text>
         </View>
       );
-    } else if (showFoot === FOOT_STATUS.IS_LOADING_MORE) {
+    } else if (footStatus === FOOT_STATUS.IS_LOADING_MORE) {
       return (
         <View style={style.footer}>
           <ActivityIndicator
             size="small"
             animating={true}
             style={style.indicator}
-            color={'red'}
+            color={Themes.GreenTheme.colors.primary}
           />
 
-          <Text style={{color: 'red'}}>正在加载更多数据...</Text>
+          <Text style={{color: Themes.GreenTheme.colors.primary}}>
+            正在加载更多数据...
+          </Text>
         </View>
       );
-    } else if (showFoot === FOOT_STATUS.HIDE) {
+    } else if (footStatus === FOOT_STATUS.HIDE) {
       return null;
     } else {
       return null;
@@ -103,27 +118,37 @@ export default function DailyQuestionPage({navigation}) {
 
   function _loadMoreData() {
     if (isLoadingMore) {
-      console.debug('is loading more data, return...');
+      LogUtil.debug({tag: TAG}, 'is loading more data, return...');
       return;
     }
     setIsLoadingMore(true);
-    setShowFoot(FOOT_STATUS.IS_LOADING_MORE);
+    setFootStatus(FOOT_STATUS.IS_LOADING_MORE);
 
     HttpUtil.sendGet(ApiUrl.getWendaArticleList(2)).then(
       function (rsp: ApiResponse) {
-        console.debug('code: ' + rsp.errorCode);
-        console.debug('msg: ' + rsp.errorMsg);
-        console.debug('content: ' + rsp.data);
-        let wendaRep: WendaResp = rsp.data as WendaResp;
+        let wendaResp: WendaResp = rsp.data as WendaResp;
+        // let simpleRsp = (({curPage, offset, over, pageCount, size, total}) => ({
+        //   curPage,
+        //   offset,
+        //   over,
+        //   pageCount,
+        //   size,
+        //   total,
+        // }))(wendaResp);
+        let {datas, ...xx} = wendaResp;
+        LogUtil.debug(
+          {tag: TAG},
+          '_loadMoreData, wendaResp: ' + JSON.stringify(xx, null, 2),
+        );
         setIsLoadingMore(false);
-        setShowFoot(FOOT_STATUS.NO_MORE);
-        let result: ArticleInfo[] = articleList.concat(wendaRep.datas);
+        setFootStatus(FOOT_STATUS.NO_MORE);
+        let result: ArticleInfo[] = articleList.concat(wendaResp.datas);
         setArticleList(result);
       },
       function (error) {
-        console.error('error: ' + error);
+        LogUtil.error({tag: TAG}, 'error: ' + error);
         setIsLoadingMore(false);
-        setShowFoot(FOOT_STATUS.HIDE);
+        setFootStatus(FOOT_STATUS.HIDE);
       },
     );
   }
@@ -131,7 +156,6 @@ export default function DailyQuestionPage({navigation}) {
   function _renderItem(data) {
     // let result = JSON.parse(data?.item);
     let article: ArticleInfo = data?.item as ArticleInfo;
-    console.log('_renderItem:' + JSON.stringify(article, null, 2));
     if (article) {
       return (
         <TouchableOpacity

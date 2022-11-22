@@ -1,4 +1,6 @@
-const TAG = '[NetWork] ';
+import LogUtil from './LogUtil';
+
+const TAG = 'NetWork';
 
 function request(
   method: string,
@@ -6,7 +8,7 @@ function request(
   params = {},
   config: RequestInit = {},
 ) {
-  console.log(TAG + 'request url: ' + url);
+  LogUtil.debug({tag: TAG}, 'request url: ' + url);
 
   let requestConfig: RequestInit = {
     credentials: 'same-origin',
@@ -32,21 +34,26 @@ function request(
       },
     });
   }
-  console.log(
-    TAG + 'request params: ' + JSON.stringify(requestConfig, null, 2),
+  LogUtil.debug(
+    {tag: TAG},
+    'request params: ' + JSON.stringify(requestConfig, null, 2),
   );
 
   return new Promise((resolve, reject) => {
     fetch(url, requestConfig)
       .then(response => {
-        console.log(TAG + 'response: ' + JSON.stringify(response, null, 2));
+        LogUtil.debug(
+          {tag: TAG},
+          'response: ' + JSON.stringify(response, null, 2),
+        );
         return response.json();
       })
       .then(responObj => {
         let errorCode = responObj.errorCode;
         let errorMsg = responObj.errorMsg;
-        console.log(
-          TAG + 'errorCode: ' + errorCode + ', errorMsg: ' + errorMsg,
+        LogUtil.debug(
+          {tag: TAG},
+          'errorCode: ' + errorCode + ', errorMsg: ' + errorMsg,
         );
         if (errorCode !== 0) {
           reject(errorMsg);
@@ -55,7 +62,7 @@ function request(
         }
       })
       .catch(err => {
-        console.log(TAG + 'request error: ' + err);
+        LogUtil.error({tag: TAG}, TAG + 'request error: ' + err);
         reject(err);
       });
   });
