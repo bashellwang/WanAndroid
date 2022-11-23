@@ -8,7 +8,7 @@ function request(
   params = {},
   config: RequestInit = {},
 ) {
-  LogUtil.debug({tag: TAG}, 'request url: ' + url);
+  LogUtil.info({tag: TAG}, 'request url: ' + url);
 
   let requestConfig: RequestInit = {
     credentials: 'same-origin',
@@ -51,7 +51,7 @@ function request(
       .then(responObj => {
         let errorCode = responObj.errorCode;
         let errorMsg = responObj.errorMsg;
-        LogUtil.debug(
+        LogUtil.info(
           {tag: TAG},
           'errorCode: ' + errorCode + ', errorMsg: ' + errorMsg,
         );

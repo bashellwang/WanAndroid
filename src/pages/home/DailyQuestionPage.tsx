@@ -18,6 +18,7 @@ import {WendaResp} from '../../model/WendaResp';
 import {WendaReq} from '../../model/WendaReq';
 import Themes from '../../foundation/Themes';
 import LogUtil from '../../utils/LogUtil';
+import {PaginationInfo} from '../../model/PaginationInfo';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -27,7 +28,8 @@ const FOOT_STATUS = {
 
 const TAG = 'DailyQuestionPage';
 export default function DailyQuestionPage({navigation}) {
-  const [articleList, setArticleList] = useState(null);
+  const [articleList, setArticleList] = useState<ArticleInfo[]>(null);
+  const [paginationInfo, setPaginationInfo] = useState<PaginationInfo>(null);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -35,7 +37,7 @@ export default function DailyQuestionPage({navigation}) {
 
   const _refreshData = useCallback(() => {
     if (isRefreshing) {
-      LogUtil.debug({tag: TAG}, 'is refreshing data, return...');
+      LogUtil.info({tag: TAG}, 'is refreshing data, return...');
       return;
     }
     setIsRefreshing(true);
@@ -43,19 +45,14 @@ export default function DailyQuestionPage({navigation}) {
     HttpUtil.sendGet(ApiUrl.getWendaArticleList()).then(
       function (rsp: ApiResponse) {
         let wendaResp: WendaResp = rsp.data as WendaResp;
-        let simpleRsp = (({curPage, offset, over, pageCount, size, total}) => ({
-          curPage,
-          offset,
-          over,
-          pageCount,
-          size,
-          total,
-        }))(wendaResp);
-        LogUtil.debug(
+        let {datas, ...info} = wendaResp;
+        LogUtil.info(
           {tag: TAG},
-          '_refreshData, wendaResp: ' + JSON.stringify(simpleRsp, null, 2),
+          '_refreshData, wendaResp pagination info: ' +
+            JSON.stringify({length: wendaResp.datas.length, ...info}, null, 2),
         );
         setArticleList(wendaResp.datas);
+        setPaginationInfo(info as PaginationInfo);
         setIsRefreshing(false);
       },
       function (error) {
@@ -118,32 +115,32 @@ export default function DailyQuestionPage({navigation}) {
 
   function _loadMoreData() {
     if (isLoadingMore) {
-      LogUtil.debug({tag: TAG}, 'is loading more data, return...');
+      LogUtil.info({tag: TAG}, 'is loading more data, return...');
+      return;
+    }
+    if (paginationInfo.curPage >= paginationInfo.pageCount) {
+      // 没有更多数据
       return;
     }
     setIsLoadingMore(true);
     setFootStatus(FOOT_STATUS.IS_LOADING_MORE);
 
-    HttpUtil.sendGet(ApiUrl.getWendaArticleList(2)).then(
+    HttpUtil.sendGet(
+      ApiUrl.getWendaArticleList(paginationInfo.curPage + 1),
+    ).then(
       function (rsp: ApiResponse) {
         let wendaResp: WendaResp = rsp.data as WendaResp;
-        // let simpleRsp = (({curPage, offset, over, pageCount, size, total}) => ({
-        //   curPage,
-        //   offset,
-        //   over,
-        //   pageCount,
-        //   size,
-        //   total,
-        // }))(wendaResp);
-        let {datas, ...xx} = wendaResp;
-        LogUtil.debug(
+        let {datas, ...info} = wendaResp;
+        LogUtil.info(
           {tag: TAG},
-          '_loadMoreData, wendaResp: ' + JSON.stringify(xx, null, 2),
+          '_loadMoreData, wendaResp: ' +
+            JSON.stringify({length: datas.length, ...info}, null, 2),
         );
         setIsLoadingMore(false);
         setFootStatus(FOOT_STATUS.NO_MORE);
         let result: ArticleInfo[] = articleList.concat(wendaResp.datas);
         setArticleList(result);
+        setPaginationInfo(info as PaginationInfo);
       },
       function (error) {
         LogUtil.error({tag: TAG}, 'error: ' + error);

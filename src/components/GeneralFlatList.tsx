@@ -46,7 +46,7 @@ export default function GeneralFlatList(props: GeneralFlatListProps): React.FC {
         onScroll={_onScroll}
         refreshControl={
           <RefreshControl
-            title={'xxx'}
+            title={'loading...'}
             colors={[Themes.GreenTheme.colors.primary]}
             tintColor={Themes.GreenTheme.colors.primary}
             refreshing={props.refreshing}

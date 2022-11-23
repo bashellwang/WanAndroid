@@ -16,6 +16,7 @@ import ApiResponse from '../../foundation/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
 import Constants from '../../foundation/Constants';
 import LogUtil from '../../utils/LogUtil';
+import Themes from '../../foundation/Themes';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -43,9 +44,6 @@ export default function TopArticlesPage({navigation}) {
 
     HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
-        LogUtil.debug({tag: TAG}, 'code: ' + rsp.errorCode);
-        LogUtil.debug({tag: TAG}, 'msg: ' + rsp.errorMsg);
-        LogUtil.debug({tag: TAG}, 'content: ' + rsp.data);
         let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         dataArray.map(data => {
           // 从置顶接口里返回的，全部设置为true
@@ -73,9 +71,8 @@ export default function TopArticlesPage({navigation}) {
         renderItem={data => _renderItem(data)}
         refreshControl={
           <RefreshControl
-            title={'xxx'}
-            colors={['red']}
-            tintColor={'blue'}
+            colors={[Themes.GreenTheme.colors.primary]}
+            tintColor={Themes.GreenTheme.colors.primary}
             refreshing={isRefreshing}
             onRefresh={() => {
               _refreshData();
@@ -92,7 +89,7 @@ export default function TopArticlesPage({navigation}) {
 
   function _loadMoreData() {
     if (isLoadingMore) {
-      LogUtil.debug({tag: TAG}, 'is loading more data, return...');
+      LogUtil.info({tag: TAG}, 'is loading more data, return...');
       return;
     }
     setIsLoadingMore(true);
@@ -100,9 +97,6 @@ export default function TopArticlesPage({navigation}) {
 
     HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
       function (rsp: ApiResponse) {
-        LogUtil.debug({tag: TAG}, 'code: ' + rsp.errorCode);
-        LogUtil.debug({tag: TAG}, 'msg: ' + rsp.errorMsg);
-        LogUtil.debug({tag: TAG}, 'content: ' + rsp.data);
         let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
         setIsLoadingMore(false);
         setShowFoot(FOOT_STATUS.NO_MORE);
@@ -125,7 +119,9 @@ export default function TopArticlesPage({navigation}) {
     if (showFoot === FOOT_STATUS.NO_MORE) {
       return (
         <View style={pageStyle.footer}>
-          <Text style={{color: 'red'}}>没有更多数据...</Text>
+          <Text style={{color: Themes.GreenTheme.colors.primary}}>
+            没有更多数据...
+          </Text>
         </View>
       );
     } else if (showFoot === FOOT_STATUS.IS_LOADING_MORE) {
@@ -135,10 +131,12 @@ export default function TopArticlesPage({navigation}) {
             size="small"
             animating={true}
             style={pageStyle.indicator}
-            color={'red'}
+            color={Themes.GreenTheme.colors.primary}
           />
 
-          <Text style={{color: 'red'}}>正在加载更多数据...</Text>
+          <Text style={{color: Themes.GreenTheme.colors.primary}}>
+            正在加载更多数据...
+          </Text>
         </View>
       );
     } else if (showFoot === FOOT_STATUS.HIDE) {
@@ -151,10 +149,10 @@ export default function TopArticlesPage({navigation}) {
   function _renderItem(data) {
     // let result = JSON.parse(data?.item);
     let article: ArticleInfo = data?.item as ArticleInfo;
-    LogUtil.debug(
-      {tag: TAG},
-      '_renderItem:' + JSON.stringify(article, null, 2),
-    );
+    // LogUtil.debug(
+    //   {tag: TAG},
+    //   '_renderItem:' + JSON.stringify(article, null, 2),
+    // );
     if (article) {
       return (
         <TouchableOpacity
