@@ -37,7 +37,7 @@ export default function TopArticlesPage({navigation}) {
 
   const _refreshData = useCallback(() => {
     if (isRefreshing) {
-      LogUtil.debug({tag: TAG}, 'is refreshing data, return...');
+      LogUtil.info({tag: TAG}, 'is refreshing data, return...');
       return;
     }
     setIsRefreshing(true);

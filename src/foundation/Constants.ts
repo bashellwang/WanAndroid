@@ -32,7 +32,6 @@ export default {
     FrameworkPage: 'FrameworkPage',
     SourceCodePage: 'SourceCodePage',
     BigFactorySharePage: 'BigFactorySharePage',
-    ArticleDetailPage: 'ArticleDetailPage',
     WebPage: 'WebPage',
   },
   // 调试模块
