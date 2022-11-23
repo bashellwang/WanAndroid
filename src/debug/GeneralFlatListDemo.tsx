@@ -15,12 +15,7 @@ import ApiResponse from '../foundation/ApiResponse';
 import {ArticleInfo} from '../model/ArticleInfo';
 import ArticleInfoCard from '../components/ArticleInfoCard';
 import LogUtil from '../utils/LogUtil';
-
-const FOOT_STATUS = {
-  HIDE: 0,
-  NO_MORE: 1,
-  IS_LOADING_MORE: 2,
-};
+import {FOOT_STATUS} from '../foundation/FootStatus';
 
 interface GeneralFlatListDemoProps {
   onClick?: (data: any) => void;

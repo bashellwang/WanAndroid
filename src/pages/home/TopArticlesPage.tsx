@@ -16,12 +16,7 @@ import Constants from '../../foundation/Constants';
 import LogUtil from '../../utils/LogUtil';
 import Themes from '../../foundation/Themes';
 import GeneralFlatList from '../../components/GeneralFlatList';
-
-const FOOT_STATUS = {
-  HIDE: 0,
-  NO_MORE: 1,
-  IS_LOADING_MORE: 2,
-};
+import {FOOT_STATUS} from '../../foundation/FootStatus';
 
 const TAG = 'TopArticlesPage';
 

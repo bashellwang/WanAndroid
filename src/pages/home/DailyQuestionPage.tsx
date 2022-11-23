@@ -19,12 +19,7 @@ import {WendaReq} from '../../model/WendaReq';
 import Themes from '../../foundation/Themes';
 import LogUtil from '../../utils/LogUtil';
 import {PaginationInfo} from '../../model/PaginationInfo';
-
-const FOOT_STATUS = {
-  HIDE: 0,
-  NO_MORE: 1,
-  IS_LOADING_MORE: 2,
-};
+import {FOOT_STATUS} from '../../foundation/FootStatus';
 
 const TAG = 'DailyQuestionPage';
 export default function DailyQuestionPage({navigation}) {
