@@ -133,7 +133,6 @@ export default function TopArticlesPage({navigation}) {
 const pageStyle = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 5,
   },
   item: {
     container: {

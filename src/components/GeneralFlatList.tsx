@@ -89,5 +89,6 @@ export default function GeneralFlatList(props: GeneralFlatListProps): React.FC {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 5,
   },
 });
