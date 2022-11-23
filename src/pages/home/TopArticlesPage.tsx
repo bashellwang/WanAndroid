@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {
   ActivityIndicator,
-  FlatList,
-  RefreshControl,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -17,6 +15,7 @@ import ArticleInfoCard from '../../components/ArticleInfoCard';
 import Constants from '../../foundation/Constants';
 import LogUtil from '../../utils/LogUtil';
 import Themes from '../../foundation/Themes';
+import GeneralFlatList from '../../components/GeneralFlatList';
 
 const FOOT_STATUS = {
   HIDE: 0,
@@ -24,16 +23,13 @@ const FOOT_STATUS = {
   IS_LOADING_MORE: 2,
 };
 
-const initData: ArticleInfo[] = null;
 const TAG = 'TopArticlesPage';
 
 export default function TopArticlesPage({navigation}) {
-  const [articleList, setArticleList] = useState(initData);
+  const [articleList, setArticleList] = useState<ArticleInfo[]>(null);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  // const [mounted, setMounted] = useState(false);
-  const [showFoot, setShowFoot] = useState(FOOT_STATUS.HIDE);
+  const [footStatus, setFootStatus] = useState(FOOT_STATUS.NO_MORE);
 
   const _refreshData = useCallback(() => {
     if (isRefreshing) {
@@ -66,57 +62,20 @@ export default function TopArticlesPage({navigation}) {
 
   return (
     <View style={pageStyle.container}>
-      <FlatList
+      <GeneralFlatList
         data={articleList}
-        renderItem={data => _renderItem(data)}
-        refreshControl={
-          <RefreshControl
-            colors={[Themes.GreenTheme.colors.primary]}
-            tintColor={Themes.GreenTheme.colors.primary}
-            refreshing={isRefreshing}
-            onRefresh={() => {
-              _refreshData();
-            }}
-          />
-        }
-        ListFooterComponent={() => _renderFooter()}
-        onEndReached={() => {
-          _loadMoreData();
+        refreshing={isRefreshing}
+        onRefresh={() => {
+          _refreshData();
         }}
+        renderItem={data => _renderItem(data)}
+        ListFooterComponent={() => _renderFooter()}
       />
     </View>
   );
 
-  function _loadMoreData() {
-    if (isLoadingMore) {
-      LogUtil.info({tag: TAG}, 'is loading more data, return...');
-      return;
-    }
-    setIsLoadingMore(true);
-    setShowFoot(FOOT_STATUS.IS_LOADING_MORE);
-
-    HttpUtil.sendGet(ApiUrl.getTopArticleList()).then(
-      function (rsp: ApiResponse) {
-        let dataArray: ArticleInfo[] = rsp.data as ArticleInfo[];
-        setIsLoadingMore(false);
-        setShowFoot(FOOT_STATUS.NO_MORE);
-        let result: ArticleInfo[] = articleList.concat(dataArray);
-        result.map(data => {
-          // 从置顶接口里返回的，全部设置为true
-          data.isTop = true;
-        });
-        setArticleList(result);
-      },
-      function (error) {
-        LogUtil.error({tag: TAG}, 'error: ' + error);
-        setIsLoadingMore(false);
-        setShowFoot(FOOT_STATUS.HIDE);
-      },
-    );
-  }
-
   function _renderFooter() {
-    if (showFoot === FOOT_STATUS.NO_MORE) {
+    if (footStatus === FOOT_STATUS.NO_MORE) {
       return (
         <View style={pageStyle.footer}>
           <Text style={{color: Themes.GreenTheme.colors.primary}}>
@@ -124,7 +83,7 @@ export default function TopArticlesPage({navigation}) {
           </Text>
         </View>
       );
-    } else if (showFoot === FOOT_STATUS.IS_LOADING_MORE) {
+    } else if (footStatus === FOOT_STATUS.IS_LOADING_MORE) {
       return (
         <View style={pageStyle.footer}>
           <ActivityIndicator
@@ -139,7 +98,7 @@ export default function TopArticlesPage({navigation}) {
           </Text>
         </View>
       );
-    } else if (showFoot === FOOT_STATUS.HIDE) {
+    } else if (footStatus === FOOT_STATUS.HIDE) {
       return null;
     } else {
       return null;
@@ -147,7 +106,6 @@ export default function TopArticlesPage({navigation}) {
   }
 
   function _renderItem(data) {
-    // let result = JSON.parse(data?.item);
     let article: ArticleInfo = data?.item as ArticleInfo;
     // LogUtil.debug(
     //   {tag: TAG},
