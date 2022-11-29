@@ -1,4 +1,4 @@
-import {ArticleInfo} from './ArticleInfo';
+import {ArticleInfo} from '../bean/ArticleInfo';
 
 export interface WendaResp {
   curPage: number;

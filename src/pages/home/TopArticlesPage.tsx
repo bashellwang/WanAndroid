@@ -6,17 +6,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {ApiUrl} from '../../foundation/ApiUrl';
-import HttpUtil from '../../utils/HttpUtil';
+import {ApiUrl} from '../../foundation/network/ApiUrl';
+import HttpUtil from '../../foundation/utils/HttpUtil';
 import {useCallback, useEffect, useState} from 'react';
-import {ArticleInfo} from '../../model/ArticleInfo';
-import ApiResponse from '../../foundation/ApiResponse';
+import {ArticleInfo} from '../../model/bean/ArticleInfo';
+import ApiResponse from '../../foundation/network/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
-import Constants from '../../foundation/Constants';
-import LogUtil from '../../utils/LogUtil';
-import Themes from '../../foundation/Themes';
+import {RouterConst} from '../../foundation/constants/RouterConst';
+import LogUtil from '../../foundation/utils/LogUtil';
+import Themes from '../../foundation/constants/Themes';
 import GeneralFlatList from '../../components/GeneralFlatList';
-import {FOOT_STATUS} from '../../foundation/FootStatus';
+import {FOOT_STATUS} from '../../foundation/constants/FootStatus';
 
 const TAG = 'TopArticlesPage';
 
@@ -111,7 +111,7 @@ export default function TopArticlesPage({navigation}) {
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => {
-            navigation.navigate(Constants.Pages.WebPage, {
+            navigation.navigate(RouterConst.Pages.WebPage, {
               title: article.title,
               url: article.link,
             });

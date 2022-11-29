@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
-import Constants from '../foundation/Constants';
-import LogUtil from '../utils/LogUtil';
+import {RouterConst} from '../foundation/constants/RouterConst';
+import LogUtil from '../foundation/utils/LogUtil';
 interface IState {
   timer: number;
 }
@@ -40,7 +40,7 @@ export default class WelcomePage extends Component<IState> {
     this.state.timer = window.setTimeout(() => {
       LogUtil.debug({tag: TAG}, '1秒后关闭闪屏');
       SplashScreen.hide();
-      this.navigation.navigate(Constants.Navigators.AppBottomTabsNavigator);
+      this.navigation.navigate(RouterConst.Navigators.AppBottomTabsNavigator);
     }, 0);
   }
 

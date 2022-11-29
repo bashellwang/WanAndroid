@@ -6,13 +6,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProjectPage from './pages/project/ProjectPage';
 import ResourcePage from './pages/resource/ResourcePage';
 import MePage from './pages/me/MePage';
-import Constants from './foundation/Constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import RecommendPage from './pages/home/RecommendPage';
 import TopicPage from './pages/home/TopicPage';
 import WebPage from './pages/WebPage';
-import Themes from './foundation/Themes';
+import Themes from './foundation/constants/Themes';
 import TopArticlesPage from './pages/home/TopArticlesPage';
 import DailyQuestionPage from './pages/home/DailyQuestionPage';
 import PerformanceOptimizationPage from './pages/home/PerformanceOptimizationPage';
@@ -25,9 +24,10 @@ import {Platform, PlatformIOSStatic} from 'react-native';
 import DebugPage from './debug/DebugPage';
 import {useEffect} from 'react';
 import TopArticlesDemoPage from './debug/TopArticlesDemoPage';
+import {RouterConst} from './foundation/constants/RouterConst';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Bottom = createBottomTabNavigator();
 const Top = createMaterialTopTabNavigator();
 
 //https://reactnavigation.org/docs/hello-react-navigation
@@ -45,17 +45,17 @@ const Top = createMaterialTopTabNavigator();
 
 function AppBottomTabsNavigator() {
   return (
-    <Tab.Navigator
+    <Bottom.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName = 'logo-react';
-          if (route.name === Constants.Navigators.HomePageTopTabsNavigator) {
+          if (route.name === RouterConst.Navigators.HomePageTopTabsNavigator) {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === Constants.Pages.ProjectPage) {
+          } else if (route.name === RouterConst.Pages.ProjectPage) {
             iconName = focused ? 'list' : 'list-outline';
-          } else if (route.name === Constants.Pages.ResourcePage) {
+          } else if (route.name === RouterConst.Pages.ResourcePage) {
             iconName = focused ? 'book' : 'book-outline';
-          } else if (route.name === Constants.Pages.MePage) {
+          } else if (route.name === RouterConst.Pages.MePage) {
             iconName = focused ? 'person' : 'person-outline';
           }
 
@@ -71,8 +71,8 @@ function AppBottomTabsNavigator() {
         // tabBarActiveTintColor: 'tomato',
         // tabBarInactiveTintColor: 'gray',
       })}>
-      <Tab.Screen
-        name={Constants.Navigators.HomePageTopTabsNavigator}
+      <Bottom.Screen
+        name={RouterConst.Navigators.HomePageTopTabsNavigator}
         component={HomePageTopTabsNavigator}
         options={{
           tabBarLabel: '首页',
@@ -80,8 +80,8 @@ function AppBottomTabsNavigator() {
           headerShown: false,
         }}
       />
-      <Tab.Screen
-        name={Constants.Pages.ProjectPage}
+      <Bottom.Screen
+        name={RouterConst.Pages.ProjectPage}
         component={ProjectPage}
         options={{
           tabBarLabel: '项目',
@@ -89,8 +89,8 @@ function AppBottomTabsNavigator() {
           headerShown: true,
         }}
       />
-      <Tab.Screen
-        name={Constants.Pages.ResourcePage}
+      <Bottom.Screen
+        name={RouterConst.Pages.ResourcePage}
         component={ResourcePage}
         options={{
           tabBarLabel: '资源',
@@ -98,8 +98,8 @@ function AppBottomTabsNavigator() {
           headerShown: true,
         }}
       />
-      <Tab.Screen
-        name={Constants.Pages.MePage}
+      <Bottom.Screen
+        name={RouterConst.Pages.MePage}
         component={MePage}
         options={{
           tabBarLabel: '我',
@@ -107,14 +107,14 @@ function AppBottomTabsNavigator() {
           headerShown: true,
         }}
       />
-    </Tab.Navigator>
+    </Bottom.Navigator>
   );
 }
 
 function HomePageTopTabsNavigator({navigation}) {
   useEffect(() => {
     const unsubscribe = navigation.addListener('tabLongPress', e => {
-      navigation.navigate(Constants.Debug.DebugPage);
+      navigation.navigate(RouterConst.Debug.DebugPage);
     });
 
     return unsubscribe;
@@ -135,7 +135,7 @@ function HomePageTopTabsNavigator({navigation}) {
         },
       }}>
       <Top.Screen
-        name={Constants.Navigators.RecommendPageTopTabsNavigator}
+        name={RouterConst.Navigators.RecommendPageTopTabsNavigator}
         component={RecommendPageTopTabsNavigator}
         options={{
           tabBarLabel: '推荐',
@@ -143,7 +143,7 @@ function HomePageTopTabsNavigator({navigation}) {
         }}
       />
       <Top.Screen
-        name={Constants.Navigators.TopicPageTopTabsNavigator}
+        name={RouterConst.Navigators.TopicPageTopTabsNavigator}
         component={TopicPageTopTabsNavigator}
         options={{
           tabBarLabel: '专题',
@@ -192,14 +192,14 @@ function RecommendPageTopTabsNavigator() {
         // ----------上面三个样式优先级逐渐升高-------------
       }}>
       <Top.Screen
-        name={Constants.Pages.TopArticlesPage}
+        name={RouterConst.Pages.TopArticlesPage}
         component={TopArticlesPage}
         options={{
           tabBarLabel: '热门博文',
         }}
       />
       <Top.Screen
-        name={Constants.Pages.DailyQuestionPage}
+        name={RouterConst.Pages.DailyQuestionPage}
         component={DailyQuestionPage}
         options={{
           tabBarLabel: '每日一问',
@@ -234,35 +234,35 @@ function TopicPageTopTabsNavigator() {
         },
       }}>
       <Top.Screen
-        name={Constants.Pages.InterviewRelatedPage}
+        name={RouterConst.Pages.InterviewRelatedPage}
         component={InterviewRelatedPage}
         options={{
           tabBarLabel: '面试相关',
         }}
       />
       <Top.Screen
-        name={Constants.Pages.PerformanceOptimizationPage}
+        name={RouterConst.Pages.PerformanceOptimizationPage}
         component={PerformanceOptimizationPage}
         options={{
           tabBarLabel: '性能优化',
         }}
       />
       <Top.Screen
-        name={Constants.Pages.FrameworkPage}
+        name={RouterConst.Pages.FrameworkPage}
         component={FrameworkPage}
         options={{
           tabBarLabel: 'framework',
         }}
       />
       <Top.Screen
-        name={Constants.Pages.SourceCodePage}
+        name={RouterConst.Pages.SourceCodePage}
         component={SourceCodePage}
         options={{
           tabBarLabel: '开源库源码',
         }}
       />
       <Top.Screen
-        name={Constants.Pages.BigFactorySharePage}
+        name={RouterConst.Pages.BigFactorySharePage}
         component={BigFactorySharePage}
         options={{
           tabBarLabel: '大厂分享',
@@ -277,12 +277,12 @@ export default function App() {
     <NavigationContainer theme={Themes.GreenTheme}>
       {
         <Stack.Navigator
-          initialRouteName={Constants.Pages.WelcomePage}
+          initialRouteName={RouterConst.Pages.WelcomePage}
           screenOptions={{
             animation: 'none',
           }}>
           <Stack.Screen
-            name={Constants.Pages.WelcomePage}
+            name={RouterConst.Pages.WelcomePage}
             component={WelcomePage}
             options={{
               title: 'Welcome',
@@ -290,28 +290,28 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name={Constants.Navigators.AppBottomTabsNavigator}
+            name={RouterConst.Navigators.AppBottomTabsNavigator}
             component={AppBottomTabsNavigator}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name={Constants.Pages.WebPage}
+            name={RouterConst.Pages.WebPage}
             component={WebPage}
             options={{
               headerShown: true,
             }}
           />
           <Stack.Screen
-            name={Constants.Debug.DebugPage}
+            name={RouterConst.Debug.DebugPage}
             component={DebugPage}
             options={{
               headerShown: true,
             }}
           />
           <Stack.Screen
-            name={Constants.Debug.TopArticlesDemoPage}
+            name={RouterConst.Debug.TopArticlesDemoPage}
             component={TopArticlesDemoPage}
             options={{
               headerShown: true,

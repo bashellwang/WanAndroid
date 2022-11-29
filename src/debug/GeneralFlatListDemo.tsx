@@ -9,13 +9,13 @@ import {
   View,
 } from 'react-native';
 import {useCallback, useEffect, useState} from 'react';
-import HttpUtil from '../utils/HttpUtil';
-import {ApiUrl} from '../foundation/ApiUrl';
-import ApiResponse from '../foundation/ApiResponse';
-import {ArticleInfo} from '../model/ArticleInfo';
+import HttpUtil from '../foundation/utils/HttpUtil';
+import {ApiUrl} from '../foundation/network/ApiUrl';
+import ApiResponse from '../foundation/network/ApiResponse';
+import {ArticleInfo} from '../model/bean/ArticleInfo';
 import ArticleInfoCard from '../components/ArticleInfoCard';
-import LogUtil from '../utils/LogUtil';
-import {FOOT_STATUS} from '../foundation/FootStatus';
+import LogUtil from '../foundation/utils/LogUtil';
+import {FOOT_STATUS} from '../foundation/constants/FootStatus';
 
 interface GeneralFlatListDemoProps {
   onClick?: (data: any) => void;

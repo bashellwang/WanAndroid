@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Themes from '../foundation/Themes';
+import Themes from '../foundation/constants/Themes';
 import {FlatListProps} from 'react-native';
 
 // type 声明联合类型

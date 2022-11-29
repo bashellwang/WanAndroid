@@ -16,7 +16,7 @@
 // 写法二，export default, 使用的地方导入该文件
 // import Constants from './foundation/Constants';
 // Constants.Pages.WelcomePage
-export default {
+export const RouterConst = {
   Pages: {
     WelcomePage: 'WelcomePage',
     HomePage: 'HomePage',

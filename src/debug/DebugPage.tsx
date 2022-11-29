@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Constants from '../foundation/Constants';
+import {RouterConst} from '../foundation/constants/RouterConst';
 import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Themes from '../foundation/Themes';
+import Themes from '../foundation/constants/Themes';
 
 export default function DebugPage({navigation}) {
   return (
@@ -10,7 +10,7 @@ export default function DebugPage({navigation}) {
         title="置顶文章页(一个组件构建一个完整页面)"
         color={Themes.GreenTheme.colors.primary}
         onPress={() => {
-          navigation.navigate(Constants.Debug.TopArticlesDemoPage);
+          navigation.navigate(RouterConst.Debug.TopArticlesDemoPage);
         }}
       />
 
@@ -18,7 +18,7 @@ export default function DebugPage({navigation}) {
         style={styles.buttonStyle.container}
         activeOpacity={0.8}
         onPress={() => {
-          navigation.navigate(Constants.Debug.TopArticlesDemoPage);
+          navigation.navigate(RouterConst.Debug.TopArticlesDemoPage);
         }}>
         <Text style={styles.buttonStyle.text}>
           置顶文章页(一个组件构建一个完整页面)

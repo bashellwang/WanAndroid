@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {ArticleInfo} from '../model/ArticleInfo';
-import Constants from '../foundation/Constants';
+import {ArticleInfo} from '../model/bean/ArticleInfo';
+import {RouterConst} from '../foundation/constants/RouterConst';
 import GeneralFlatListDemo from './GeneralFlatListDemo';
 
 export default function TopArticlesDemoPage({navigation}) {
   return (
     <GeneralFlatListDemo
       onClick={(data: ArticleInfo) => {
-        navigation.navigate(Constants.Pages.WebPage, {
+        navigation.navigate(RouterConst.Pages.WebPage, {
           title: data.title,
           url: data.link,
         });

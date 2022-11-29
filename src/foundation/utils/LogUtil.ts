@@ -5,7 +5,7 @@ const LOG_LEVEL = {
   ERROR: 4,
 };
 
-const logLevel = LOG_LEVEL.INFO;
+const logLevel = LOG_LEVEL.DEBUG;
 export default class LogUtil {
   /**
    * 参考：https://juejin.cn/post/6844903975209140238

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import Constants from '../../foundation/Constants';
+import {RouterConst} from '../../foundation/constants/RouterConst';
 
 export default class HomePage extends Component<any, any> {
   private navigation: any;
@@ -24,7 +24,7 @@ export default class HomePage extends Component<any, any> {
           title="Go Home"
           onPress={() =>
             this.navigation.navigate(
-              Constants.Navigators.HomePageTopTabsNavigator,
+              RouterConst.Navigators.HomePageTopTabsNavigator,
             )
           }
         />

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {ArticleInfo} from '../../model/ArticleInfo';
-import Constants from '../../foundation/Constants';
+import {ArticleInfo} from '../../model/bean/ArticleInfo';
+import {RouterConst} from '../../foundation/constants/RouterConst';
 import GeneralFlatList from '../../components/GeneralFlatList';
 import {useCallback, useEffect, useState} from 'react';
-import HttpUtil from '../../utils/HttpUtil';
-import {ApiUrl} from '../../foundation/ApiUrl';
-import ApiResponse from '../../foundation/ApiResponse';
+import HttpUtil from '../../foundation/utils/HttpUtil';
+import {ApiUrl} from '../../foundation/network/ApiUrl';
+import ApiResponse from '../../foundation/network/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
 import {
   ActivityIndicator,
@@ -14,12 +14,12 @@ import {
   View,
   Text,
 } from 'react-native';
-import {WendaResp} from '../../model/WendaResp';
-import {WendaReq} from '../../model/WendaReq';
-import Themes from '../../foundation/Themes';
-import LogUtil from '../../utils/LogUtil';
-import {PaginationInfo} from '../../model/PaginationInfo';
-import {FOOT_STATUS} from '../../foundation/FootStatus';
+import {WendaResp} from '../../model/network/WendaResp';
+import {WendaReq} from '../../model/network/WendaReq';
+import Themes from '../../foundation/constants/Themes';
+import LogUtil from '../../foundation/utils/LogUtil';
+import {PaginationInfo} from '../../model/bean/PaginationInfo';
+import {FOOT_STATUS} from '../../foundation/constants/FootStatus';
 
 const TAG = 'DailyQuestionPage';
 export default function DailyQuestionPage({navigation}) {
@@ -153,7 +153,7 @@ export default function DailyQuestionPage({navigation}) {
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => {
-            navigation.navigate(Constants.Pages.WebPage, {
+            navigation.navigate(RouterConst.Pages.WebPage, {
               title: article.title,
               url: article.link,
             });

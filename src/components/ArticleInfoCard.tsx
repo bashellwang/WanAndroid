@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {ArticleInfo, ArticleTag} from '../model/ArticleInfo';
+import {ArticleInfo, ArticleTag} from '../model/bean/ArticleInfo';
 import {View, StyleSheet, Text} from 'react-native';
 import OutlineTextList, {ItemInfo} from './OutlineTextList';
 import OutlineText, {OutlineTextColorTheme} from './OutlineText';
