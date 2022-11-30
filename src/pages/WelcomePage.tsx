@@ -40,7 +40,7 @@ export default class WelcomePage extends Component<IState> {
     this.state.timer = window.setTimeout(() => {
       LogUtil.debug({tag: TAG}, '1秒后关闭闪屏');
       SplashScreen.hide();
-      this.navigation.navigate(RouterConst.Navigators.AppBottomTabsNavigator);
+      this.navigation.navigate(RouterConst.Pages.HomePage);
     }, 0);
   }
 
