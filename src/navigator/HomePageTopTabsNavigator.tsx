@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {RouterConst} from '../foundation/constants/RouterConst';
+import {RouterConst} from '../foundation/constant/RouterConst';
 import {Platform} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {useEffect} from 'react';

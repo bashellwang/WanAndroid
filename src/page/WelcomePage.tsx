@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
-import {RouterConst} from '../foundation/constants/RouterConst';
-import LogUtil from '../foundation/utils/LogUtil';
+import {RouterConst} from '../foundation/constant/RouterConst';
+import LogUtil from '../foundation/util/LogUtil';
 interface IState {
   timer: number;
 }

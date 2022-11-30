@@ -1,6 +1,11 @@
 import * as React from 'react';
+import {ArticleInfo} from '../../model/bean/ArticleInfo';
+import {RouterConst} from '../../foundation/constant/RouterConst';
 import GeneralFlatList from '../../components/GeneralFlatList';
 import {useCallback, useEffect, useState} from 'react';
+import HttpUtil from '../../foundation/util/HttpUtil';
+import {ApiUrl} from '../../foundation/network/ApiUrl';
+import ApiResponse from '../../foundation/network/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
 import {
   ActivityIndicator,
@@ -9,20 +14,15 @@ import {
   View,
   Text,
 } from 'react-native';
-import {KnowledgeArchitectureInfo} from '../../model/bean/KnowledgeArchitectureInfo';
-import {ArticleInfo} from '../../model/bean/ArticleInfo';
-import {PaginationInfo} from '../../model/bean/PaginationInfo';
-import LogUtil from '../../foundation/utils/LogUtil';
-import HttpUtil from '../../foundation/utils/HttpUtil';
-import {ApiUrl} from '../../foundation/network/ApiUrl';
-import ApiResponse from '../../foundation/network/ApiResponse';
-import Themes from '../../foundation/constants/Themes';
-import {FOOT_STATUS} from '../../foundation/constants/FootStatus';
 import {WendaResp} from '../../model/network/WendaResp';
-import {RouterConst} from '../../foundation/constants/RouterConst';
+import {WendaReq} from '../../model/network/WendaReq';
+import Themes from '../../foundation/constant/Theme';
+import LogUtil from '../../foundation/util/LogUtil';
+import {PaginationInfo} from '../../model/bean/PaginationInfo';
+import {FOOT_STATUS} from '../../foundation/constant/FootStatus';
 
-const TAG = 'InterviewRelatedPage';
-export default function InterviewRelatedPage({navigation}) {
+const TAG = 'DailyQuestionPage';
+export default function DailyQuestionPage({navigation}) {
   const [articleList, setArticleList] = useState<ArticleInfo[]>(null);
   const [paginationInfo, setPaginationInfo] = useState<PaginationInfo>(null);
 
@@ -36,30 +36,6 @@ export default function InterviewRelatedPage({navigation}) {
       return;
     }
     setIsRefreshing(true);
-
-    // HttpUtil.sendGet(ApiUrl.getKnowledgeArchitecture()).then(
-    //   function (rsp: ApiResponse) {
-    //     let rspInfo: KnowledgeArchitectureInfo[] =
-    //       rsp.data as KnowledgeArchitectureInfo[];
-    //
-    //     let result = [];
-    //     rspInfo.map(item => {
-    //       let {children, ...xx} = item;
-    //       result.push(xx);
-    //     });
-    //     LogUtil.info(
-    //       {tag: TAG},
-    //       '_refreshData, ' + JSON.stringify(result, null, 2),
-    //     );
-    //     // setArticleList(wendaResp.datas);
-    //     // setPaginationInfo(info as PaginationInfo);
-    //     // setIsRefreshing(false);
-    //   },
-    //   function (error) {
-    //     LogUtil.error({tag: TAG}, 'error: ' + error);
-    //     // setIsRefreshing(false);
-    //   },
-    // );
 
     HttpUtil.sendGet(ApiUrl.getWendaArticleList()).then(
       function (rsp: ApiResponse) {

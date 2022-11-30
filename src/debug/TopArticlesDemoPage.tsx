@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ArticleInfo} from '../model/bean/ArticleInfo';
-import {RouterConst} from '../foundation/constants/RouterConst';
+import {RouterConst} from '../foundation/constant/RouterConst';
 import GeneralFlatListDemo from './GeneralFlatListDemo';
 
 export default function TopArticlesDemoPage({navigation}) {

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {RouterConst} from '../foundation/constants/RouterConst';
-import ProjectPage from '../pages/project/ProjectPage';
-import ResourcePage from '../pages/resource/ResourcePage';
-import MePage from '../pages/me/MePage';
+import {RouterConst} from '../foundation/constant/RouterConst';
+import ProjectPage from '../page/project/ProjectPage';
+import ResourcePage from '../page/resource/ResourcePage';
+import MePage from '../page/me/MePage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomePageTopTabsNavigator from './HomePageTopTabsNavigator';
 

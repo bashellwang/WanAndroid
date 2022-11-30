@@ -7,16 +7,16 @@ import {
   View,
 } from 'react-native';
 import {ApiUrl} from '../../foundation/network/ApiUrl';
-import HttpUtil from '../../foundation/utils/HttpUtil';
+import HttpUtil from '../../foundation/util/HttpUtil';
 import {useCallback, useEffect, useState} from 'react';
 import {ArticleInfo} from '../../model/bean/ArticleInfo';
 import ApiResponse from '../../foundation/network/ApiResponse';
 import ArticleInfoCard from '../../components/ArticleInfoCard';
-import {RouterConst} from '../../foundation/constants/RouterConst';
-import LogUtil from '../../foundation/utils/LogUtil';
-import Themes from '../../foundation/constants/Themes';
+import {RouterConst} from '../../foundation/constant/RouterConst';
+import LogUtil from '../../foundation/util/LogUtil';
+import Themes from '../../foundation/constant/Theme';
 import GeneralFlatList from '../../components/GeneralFlatList';
-import {FOOT_STATUS} from '../../foundation/constants/FootStatus';
+import {FOOT_STATUS} from '../../foundation/constant/FootStatus';
 
 const TAG = 'TopArticlesPage';
 

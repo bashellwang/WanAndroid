@@ -1,12 +1,12 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import HomePage from './pages/home/HomePage';
-import WelcomePage from './pages/WelcomePage';
-import WebPage from './pages/WebPage';
-import Themes from './foundation/constants/Themes';
+import HomePage from './page/home/HomePage';
+import WelcomePage from './page/WelcomePage';
+import WebPage from './page/WebPage';
+import Themes from './foundation/constant/Theme';
 import DebugPage from './debug/DebugPage';
 import TopArticlesDemoPage from './debug/TopArticlesDemoPage';
-import {RouterConst} from './foundation/constants/RouterConst';
+import {RouterConst} from './foundation/constant/RouterConst';
 
 const Stack = createNativeStackNavigator();
 

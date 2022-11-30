@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {RouterConst} from '../foundation/constants/RouterConst';
+import {RouterConst} from '../foundation/constant/RouterConst';
 import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Themes from '../foundation/constants/Themes';
+import Themes from '../foundation/constant/Theme';
 
 export default function DebugPage({navigation}) {
   return (

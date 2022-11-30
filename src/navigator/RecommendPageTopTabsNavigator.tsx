@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {RouterConst} from '../foundation/constants/RouterConst';
+import {RouterConst} from '../foundation/constant/RouterConst';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import TopArticlesPage from '../pages/home/TopArticlesPage';
-import DailyQuestionPage from '../pages/home/DailyQuestionPage';
+import TopArticlesPage from '../page/home/TopArticlesPage';
+import DailyQuestionPage from '../page/home/DailyQuestionPage';
 
 const Top = createMaterialTopTabNavigator();
 

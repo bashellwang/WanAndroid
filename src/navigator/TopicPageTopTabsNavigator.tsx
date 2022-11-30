@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {RouterConst} from '../foundation/constants/RouterConst';
+import {RouterConst} from '../foundation/constant/RouterConst';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import InterviewRelatedPage from '../pages/home/InterviewRelatedPage';
-import PerformanceOptimizationPage from '../pages/home/PerformanceOptimizationPage';
-import FrameworkPage from '../pages/home/FrameworkPage';
-import SourceCodePage from '../pages/home/SourceCodePage';
-import BigFactorySharePage from '../pages/home/BigFactorySharePage';
+import InterviewRelatedPage from '../page/home/InterviewRelatedPage';
+import PerformanceOptimizationPage from '../page/home/PerformanceOptimizationPage';
+import FrameworkPage from '../page/home/FrameworkPage';
+import SourceCodePage from '../page/home/SourceCodePage';
+import BigFactorySharePage from '../page/home/BigFactorySharePage';
 
 const Top = createMaterialTopTabNavigator();
 
