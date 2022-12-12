@@ -15,7 +15,7 @@ export default function RecommendPageTopTabsNavigator() {
         // tab 中文本样式
         tabBarLabelStyle: {
           fontsize: 20,
-          fontWeight: '200',
+          fontWeight: 'bold',
           // color: 'red',
           // backgroundColor: 'green',
         },

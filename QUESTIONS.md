@@ -47,3 +47,8 @@ R:
 https://stackoverflow.com/questions/51340819/elegant-way-to-copy-only-a-part-of-an-object/51340842#51340842
 https://www.51cto.com/article/618100.html
 ```
+
+```
+Q: Error: Looks like you have nested a 'NavigationContainer' inside another. Normally you need only one container at the root of the app
+A: https://stackoverflow.com/questions/61677422/error-looks-like-you-have-nested-a-navigationcontainer-inside-another-normal
+```

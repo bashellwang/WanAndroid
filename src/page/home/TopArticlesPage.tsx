@@ -39,6 +39,10 @@ export default function TopArticlesPage({navigation}) {
         dataArray.map(data => {
           // 从置顶接口里返回的，全部设置为true
           data.isTop = true;
+          LogUtil.debug(
+            {tag: TAG},
+            '_renderItem:' + JSON.stringify(data, null, 2),
+          );
         });
         setArticleList(dataArray);
         setIsRefreshing(false);

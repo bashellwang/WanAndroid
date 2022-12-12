@@ -3,8 +3,8 @@ import {RouterConst} from '../foundation/constant/RouterConst';
 import {Platform} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {useEffect} from 'react';
-import TopicPageTopTabsNavigator from './TopicPageTopTabsNavigator';
 import RecommendPageTopTabsNavigator from './RecommendPageTopTabsNavigator';
+import TopicPage from '../page/home/TopicPage';
 
 const Top = createMaterialTopTabNavigator();
 
@@ -16,6 +16,7 @@ export default function HomePageTopTabsNavigator({navigation}) {
 
     return unsubscribe;
   }, [navigation]);
+
   return (
     <Top.Navigator
       screenOptions={{
@@ -40,8 +41,8 @@ export default function HomePageTopTabsNavigator({navigation}) {
         }}
       />
       <Top.Screen
-        name={RouterConst.Navigators.TopicPageTopTabsNavigator}
-        component={TopicPageTopTabsNavigator}
+        name={RouterConst.Pages.TopicPage}
+        component={TopicPage}
         options={{
           tabBarLabel: '专题',
           title: 'Topic',
