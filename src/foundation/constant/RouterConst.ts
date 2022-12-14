@@ -18,20 +18,20 @@
 // Constants.Pages.WelcomePage
 export const RouterConst = {
   Pages: {
-    WelcomePage: 'WelcomePage',
     HomePage: 'HomePage',
-    ProjectPage: 'ProjectPage',
-    ResourcePage: 'ResourcePage',
-    MePage: 'MePage',
-    RecommendPage: 'RecommendPage',
-    TopicPage: 'TopicPage',
-    TopArticlesPage: 'TopArticlesPage',
+    WelcomePage: 'WelcomePage',
+
     DailyQuestionPage: 'DailyQuestionPage',
-    InterviewRelatedPage: 'InterviewRelatedPage',
-    PerformanceOptimizationPage: 'PerformanceOptimizationPage',
-    FrameworkPage: 'FrameworkPage',
-    SourceCodePage: 'SourceCodePage',
-    BigFactorySharePage: 'BigFactorySharePage',
+    RecommendPage: 'RecommendPage',
+    TopArticlesPage: 'TopArticlesPage',
+    TopicPage: 'TopicPage',
+
+    MePage: 'MePage',
+
+    ProjectPage: 'ProjectPage',
+
+    ResourcePage: 'ResourcePage',
+
     WebPage: 'WebPage',
   },
   // 调试模块
@@ -44,7 +44,6 @@ export const RouterConst = {
     AppBottomTabsNavigator: 'AppBottomTabsNavigator',
     HomePageTopTabsNavigator: 'HomePageTopTabsNavigator',
     RecommendPageTopTabsNavigator: 'RecommendPageTopTabsNavigator',
-    TopicPageTopTabsNavigator: 'TopicPageTopTabsNavigator',
   },
   Colors: {},
 };
