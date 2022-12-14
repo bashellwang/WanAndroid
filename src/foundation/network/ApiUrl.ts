@@ -72,6 +72,8 @@ export class ApiUrl {
    *
    * @param pageId 页码：拼接在链接上，从0开始。
    * @param cid 分类的 id
+   *
+   * 注意：这里返回结果 rsp 的 curPage 会比传入的大1；比如你传入pageId=0，则返回结果的 curPage=1；因此使用时需要小心
    */
   static getKnowledgeArchitectureDetail(
     pageId: number = 0,

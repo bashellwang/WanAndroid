@@ -38,8 +38,13 @@ export default function ArticleInfoCard(props: ArticleInfoCardProps): FC {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <Text style={pageStyle.item.label}>作者:{article.author}</Text>
-        <Text style={pageStyle.item.label}>时间:{article.niceDate}</Text>
+        {article.author ? (
+          <Text style={pageStyle.item.label}>作者:{article.author}</Text>
+        ) : null}
+
+        {article.niceDate ? (
+          <Text style={pageStyle.item.label}>时间:{article.niceDate}</Text>
+        ) : null}
       </View>
 
       {_renderTags(article)}

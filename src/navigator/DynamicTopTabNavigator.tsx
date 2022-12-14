@@ -6,7 +6,7 @@ const Top = createMaterialTopTabNavigator();
 
 // 默认 TopTabNavigator ScreenOptions 参数
 let defaultScreenOptions = {
-  lazy: false, //屏幕懒加载
+  lazy: true, //屏幕懒加载
 
   // tab 中文本样式
   tabBarLabelStyle: {

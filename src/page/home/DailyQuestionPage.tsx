@@ -14,8 +14,7 @@ import {
   View,
   Text,
 } from 'react-native';
-import {WendaResp} from '../../model/network/WendaResp';
-import {WendaReq} from '../../model/network/WendaReq';
+import {ArticlePaginationInfo} from '../../model/network/ArticlePaginationInfo';
 import Themes from '../../foundation/constant/Theme';
 import LogUtil from '../../foundation/util/LogUtil';
 import {PaginationInfo} from '../../model/bean/PaginationInfo';
@@ -39,12 +38,13 @@ export default function DailyQuestionPage({navigation}) {
 
     HttpUtil.sendGet(ApiUrl.getWendaArticleList()).then(
       function (rsp: ApiResponse) {
-        let wendaResp: WendaResp = rsp.data as WendaResp;
+        let wendaResp: ArticlePaginationInfo =
+          rsp.data as ArticlePaginationInfo;
         let {datas, ...info} = wendaResp;
         LogUtil.info(
           {tag: TAG},
           '_refreshData, wendaResp pagination info: ' +
-            JSON.stringify({length: wendaResp.datas.length, ...info}, null, 2),
+            JSON.stringify({length: datas.length, ...info}, null, 2),
         );
         setArticleList(wendaResp.datas);
         setPaginationInfo(info as PaginationInfo);
@@ -124,7 +124,8 @@ export default function DailyQuestionPage({navigation}) {
       ApiUrl.getWendaArticleList(paginationInfo.curPage + 1),
     ).then(
       function (rsp: ApiResponse) {
-        let wendaResp: WendaResp = rsp.data as WendaResp;
+        let wendaResp: ArticlePaginationInfo =
+          rsp.data as ArticlePaginationInfo;
         let {datas, ...info} = wendaResp;
         LogUtil.info(
           {tag: TAG},

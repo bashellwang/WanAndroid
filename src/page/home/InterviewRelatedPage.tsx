@@ -18,7 +18,7 @@ import {ApiUrl} from '../../foundation/network/ApiUrl';
 import ApiResponse from '../../foundation/network/ApiResponse';
 import Themes from '../../foundation/constant/Theme';
 import {FOOT_STATUS} from '../../foundation/constant/FootStatus';
-import {WendaResp} from '../../model/network/WendaResp';
+import {ArticlePaginationInfo} from '../../model/network/ArticlePaginationInfo';
 import {RouterConst} from '../../foundation/constant/RouterConst';
 
 const TAG = 'InterviewRelatedPage';
@@ -63,12 +63,13 @@ export default function InterviewRelatedPage({navigation}) {
 
     HttpUtil.sendGet(ApiUrl.getWendaArticleList()).then(
       function (rsp: ApiResponse) {
-        let wendaResp: WendaResp = rsp.data as WendaResp;
+        let wendaResp: ArticlePaginationInfo =
+          rsp.data as ArticlePaginationInfo;
         let {datas, ...info} = wendaResp;
         LogUtil.info(
           {tag: TAG},
           '_refreshData, wendaResp pagination info: ' +
-            JSON.stringify({length: wendaResp.datas.length, ...info}, null, 2),
+            JSON.stringify({length: datas.length, ...info}, null, 2),
         );
         setArticleList(wendaResp.datas);
         setPaginationInfo(info as PaginationInfo);
@@ -148,7 +149,8 @@ export default function InterviewRelatedPage({navigation}) {
       ApiUrl.getWendaArticleList(paginationInfo.curPage + 1),
     ).then(
       function (rsp: ApiResponse) {
-        let wendaResp: WendaResp = rsp.data as WendaResp;
+        let wendaResp: ArticlePaginationInfo =
+          rsp.data as ArticlePaginationInfo;
         let {datas, ...info} = wendaResp;
         LogUtil.info(
           {tag: TAG},
