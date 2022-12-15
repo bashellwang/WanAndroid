@@ -5,10 +5,13 @@ import TopArticlesPage from './TopArticlesPage';
 import DailyQuestionPage from './DailyQuestionPage';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {RouterConst} from '../../foundation/constant/RouterConst';
+import * as _ from 'lodash';
 
 const Top = createMaterialTopTabNavigator();
 const TAB_PAGE_LIST = [
   <Top.Screen
+    // @ts-ignore
+    key={_.uniqueId()}
     name={RouterConst.Pages.TopArticlesPage}
     component={TopArticlesPage}
     options={{
@@ -16,6 +19,8 @@ const TAB_PAGE_LIST = [
     }}
   />,
   <Top.Screen
+    // @ts-ignore
+    key={_.uniqueId()}
     name={RouterConst.Pages.DailyQuestionPage}
     component={DailyQuestionPage}
     options={{

@@ -2,6 +2,7 @@ import {FC} from 'react';
 import * as React from 'react';
 import OutlineText from './OutlineText';
 import {View} from 'react-native';
+import * as _ from 'lodash';
 
 export interface ItemInfo {
   text: string;
@@ -36,6 +37,8 @@ export default function OutlineTextList(props: OutlineTextListProps): FC {
             text={itemInfo.text}
             colorTheme={itemInfo.color}
             marginLeft={marginLeftValue}
+            // @ts-ignore
+            key={_.uniqueId()}
           />
         );
       })}

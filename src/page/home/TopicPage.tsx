@@ -9,6 +9,7 @@ import ApiResponse from '../../foundation/network/ApiResponse';
 import LogUtil from '../../foundation/util/LogUtil';
 import {KnowledgeArchitectureInfo} from '../../model/bean/KnowledgeArchitectureInfo';
 import ArticleListPage from '../../components/ArticleListPage';
+import * as _ from 'lodash';
 
 const TAG = 'TopicPage';
 const Top = createMaterialTopTabNavigator();
@@ -21,6 +22,8 @@ function _createTabs(dataList: KnowledgeArchitectureInfo[]) {
   dataList.map((knowledgeArchitectureInfo, index) => {
     tabPages.push(
       <Top.Screen
+        // @ts-ignore
+        key={_.uniqueId()}
         name={'TopicPage_' + knowledgeArchitectureInfo.id}
         component={ArticleListPage}
         initialParams={{
