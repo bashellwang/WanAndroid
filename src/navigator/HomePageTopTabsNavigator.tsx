@@ -3,8 +3,9 @@ import {RouterConst} from '../foundation/constant/RouterConst';
 import {Platform} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {useEffect} from 'react';
-import RecommendPageTopTabsNavigator from './RecommendPageTopTabsNavigator';
 import TopicPage from '../page/home/TopicPage';
+import RecommendPage from '../page/home/RecommendPage';
+import RecommendPageTopTabsNavigator from './RecommendPageTopTabsNavigator';
 
 const Top = createMaterialTopTabNavigator();
 
@@ -33,8 +34,10 @@ export default function HomePageTopTabsNavigator({navigation}) {
         },
       }}>
       <Top.Screen
-        name={RouterConst.Navigators.RecommendPageTopTabsNavigator}
-        component={RecommendPageTopTabsNavigator}
+        // name={RouterConst.Navigators.RecommendPageTopTabsNavigator}
+        // component={RecommendPageTopTabsNavigator}
+        name={RouterConst.Pages.RecommendPage}
+        component={RecommendPage}
         options={{
           tabBarLabel: '推荐',
           title: 'Recommend',

@@ -6,6 +6,11 @@ import DailyQuestionPage from '../page/home/DailyQuestionPage';
 
 const Top = createMaterialTopTabNavigator();
 
+/**
+ * @deprecated
+ * 路由跳转不再单独一个文件定义，直接放到推荐页里实现
+ * 参考：RecommendPage
+ */
 export default function RecommendPageTopTabsNavigator() {
   return (
     <Top.Navigator
