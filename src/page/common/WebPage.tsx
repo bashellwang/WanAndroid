@@ -1,6 +1,8 @@
 import * as React from 'react';
 import WebView from 'react-native-webview';
 import {useEffect} from 'react';
+import {useIsFocused} from '@react-navigation/native';
+import {BackHandler} from 'react-native';
 
 export default function WebPage({route, navigation}) {
   /**
@@ -13,7 +15,20 @@ export default function WebPage({route, navigation}) {
     // 设置标题
     navigation.setOptions({title: title});
   }, [navigation, title]);
-
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    const backAction = () => {
+      if (isFocused) {
+        navigation.goBack();
+        return true;
+      }
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
   return (
     <WebView
       source={{
