@@ -21,11 +21,11 @@ import {ArticleInfo} from './ArticleInfo';
  *     "visible": 1
  * }
  */
-export interface KnowledgeArchitectureInfo {
+export interface ArchitectureInfo {
   /**
    * 二级目录结构
    */
-  children: KnowledgeArchitectureInfo[];
+  children: ArchitectureInfo[];
   courseId: number;
   /**
    * 分类id

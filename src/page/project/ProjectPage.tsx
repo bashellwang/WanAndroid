@@ -7,7 +7,7 @@ import HttpUtil from '../../foundation/util/HttpUtil';
 import {ApiUrl} from '../../foundation/network/ApiUrl';
 import ApiResponse from '../../foundation/network/ApiResponse';
 import LogUtil from '../../foundation/util/LogUtil';
-import {KnowledgeArchitectureInfo} from '../../model/bean/KnowledgeArchitectureInfo';
+import {ArchitectureInfo} from '../../model/bean/ArchitectureInfo';
 import ArticleListPage from '../../components/ArticleListPage';
 import * as _ from 'lodash';
 
@@ -17,21 +17,21 @@ const Top = createMaterialTopTabNavigator();
 /**
  * 生成动态页面
  */
-function _createTabs(dataList: KnowledgeArchitectureInfo[]) {
+function _createTabs(dataList: ArchitectureInfo[]) {
   let tabPages = [];
-  dataList.map((knowledgeArchitectureInfo, index) => {
+  dataList.map((architectureInfo, index) => {
     tabPages.push(
       <Top.Screen
         // @ts-ignore
         key={_.uniqueId()}
-        name={'ProjectPage_' + knowledgeArchitectureInfo.id}
+        name={'ProjectPage_' + architectureInfo.id}
         component={ArticleListPage}
         initialParams={{
           // 初始化参数传入
-          id: knowledgeArchitectureInfo.id,
+          id: architectureInfo.id,
         }}
         options={{
-          tabBarLabel: knowledgeArchitectureInfo.name,
+          tabBarLabel: architectureInfo.name,
         }}
       />,
     );
@@ -40,17 +40,17 @@ function _createTabs(dataList: KnowledgeArchitectureInfo[]) {
 }
 
 export default function ProjectPage(): FC<any, any> {
-  const [knowledgeArchitectureInfoList, setKnowledgeArchitectureInfoList] =
-    useState<KnowledgeArchitectureInfo[]>(null);
+  const [architectureInfoList, setArchitectureInfoList] =
+    useState<ArchitectureInfo[]>(null);
   useEffect(() => {
-    getKnowledgeArchitecture();
+    getProjectCategory();
   }, []);
 
-  if (knowledgeArchitectureInfoList) {
+  if (architectureInfoList) {
     return (
       <View style={{flex: 1}}>
         <DynamicTopTabNavigator
-          topScreenList={_createTabs(knowledgeArchitectureInfoList)}
+          topScreenList={_createTabs(architectureInfoList)}
         />
       </View>
     );
@@ -61,13 +61,12 @@ export default function ProjectPage(): FC<any, any> {
   /**
    * 获取项目分类数据
    */
-  function getKnowledgeArchitecture() {
+  function getProjectCategory() {
     HttpUtil.sendGet(ApiUrl.getProjectCategory()).then(
       function (rsp: ApiResponse) {
-        let dataArray: KnowledgeArchitectureInfo[] =
-          rsp.data as KnowledgeArchitectureInfo[];
+        let dataArray: ArchitectureInfo[] = rsp.data as ArchitectureInfo[];
         // 根据返回的数据构建 tab 页
-        setKnowledgeArchitectureInfoList(dataArray);
+        setArchitectureInfoList(dataArray);
       },
       function (error) {
         LogUtil.error({tag: TAG}, 'error: ' + error);

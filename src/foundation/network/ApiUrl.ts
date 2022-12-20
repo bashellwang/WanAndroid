@@ -54,7 +54,7 @@ export class ApiUrl {
    *     "visible": 1
    * }
    */
-  static getKnowledgeArchitecture(): string {
+  static getArchitectureTree(): string {
     return BASE_URL + '/tree/json';
   }
 
@@ -67,10 +67,7 @@ export class ApiUrl {
    *
    * 注意：这里返回结果 rsp 的 curPage 会比传入的大1；比如你传入pageId=0，则返回结果的 curPage=1；因此使用时需要小心
    */
-  static getKnowledgeArchitectureDetail(
-    pageId: number = 0,
-    cid: number,
-  ): string {
+  static getArchitectureDetail(pageId: number = 0, cid: number): string {
     return BASE_URL + '/article/list/' + pageId + '/json?cid=' + cid;
   }
 

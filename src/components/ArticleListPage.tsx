@@ -17,7 +17,7 @@ import LogUtil from '../foundation/util/LogUtil';
 import Themes from '../foundation/constant/Theme';
 import GeneralFlatList from './GeneralFlatList';
 import {FOOT_STATUS} from '../foundation/constant/FootStatus';
-import {ArticlePaginationInfo} from '../model/network/ArticlePaginationInfo';
+import {ArticlePaginationInfo} from '../model/bean/ArticlePaginationInfo';
 import {PaginationInfo} from '../model/bean/PaginationInfo';
 
 const TAG = 'ArticleListPage';
@@ -42,7 +42,7 @@ export default function ArticleListPage({route, navigation}) {
     }
     setIsRefreshing(true);
 
-    HttpUtil.sendGet(ApiUrl.getKnowledgeArchitectureDetail(0, id)).then(
+    HttpUtil.sendGet(ApiUrl.getArchitectureDetail(0, id)).then(
       function (rsp: ApiResponse) {
         let articlePaginationInfoRsp: ArticlePaginationInfo =
           rsp.data as ArticlePaginationInfo;
@@ -150,7 +150,7 @@ export default function ArticleListPage({route, navigation}) {
     setFootStatus(FOOT_STATUS.IS_LOADING_MORE);
 
     HttpUtil.sendGet(
-      ApiUrl.getKnowledgeArchitectureDetail(paginationInfo.curPage, id),
+      ApiUrl.getArchitectureDetail(paginationInfo.curPage, id),
     ).then(
       function (rsp: ApiResponse) {
         let articlePaginationInfoRsp: ArticlePaginationInfo =

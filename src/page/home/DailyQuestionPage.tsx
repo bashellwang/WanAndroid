@@ -14,7 +14,7 @@ import {
   View,
   Text,
 } from 'react-native';
-import {ArticlePaginationInfo} from '../../model/network/ArticlePaginationInfo';
+import {ArticlePaginationInfo} from '../../model/bean/ArticlePaginationInfo';
 import Themes from '../../foundation/constant/Theme';
 import LogUtil from '../../foundation/util/LogUtil';
 import {PaginationInfo} from '../../model/bean/PaginationInfo';
