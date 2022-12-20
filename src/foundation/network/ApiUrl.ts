@@ -30,14 +30,6 @@ export class ApiUrl {
   }
 
   /**
-   * 按时间分页展示所有项目。
-   * @param pageId 页码，拼接在连接中，从0开始。
-   */
-  static getProjectList(pageId = 0) {
-    return BASE_URL + '/article/listproject/' + pageId + '/json';
-  }
-
-  /**
    * 知识体系
    * https://www.wanandroid.com/tree/json
    *
@@ -91,5 +83,43 @@ export class ApiUrl {
    */
   static getArticlesByAuthor(pageId: number = 0, author: string): string {
     return BASE_URL + '/article/list/' + pageId + '/json?author=' + author;
+  }
+
+  /**
+   * 项目分类
+   * https://www.wanandroid.com/project/tree/json
+   * [
+   *     {
+   *         "children": [],
+   *         "courseId": 13,
+   *         "id": 294, // 该id在获取该分类下项目时需要用到
+   *         "name": "完整项目", // 该分类名称
+   *         "order": 145000,
+   *         "parentChapterId": 293,
+   *         "visible": 0
+   *     }
+   * ]
+   */
+  static getProjectCategory(): string {
+    return BASE_URL + '/project/tree/json';
+  }
+
+  /**
+   * 某一个分类下项目列表数据
+   * https://www.wanandroid.com/project/list/1/json?cid=294
+   *
+   * @param cid 分类id
+   * @param pageId 页码，从1开始
+   */
+  static getProjectListInCategory(cid: number, pageId: number = 1) {
+    return BASE_URL + '/project/list/' + pageId + '/json?cid=' + cid;
+  }
+
+  /**
+   * 按时间分页展示所有项目。
+   * @param pageId 页码，拼接在连接中，从0开始。
+   */
+  static getProjectList(pageId = 0) {
+    return BASE_URL + '/article/listproject/' + pageId + '/json';
   }
 }

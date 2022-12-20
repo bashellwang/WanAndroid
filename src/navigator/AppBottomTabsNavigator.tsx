@@ -52,7 +52,7 @@ export default function AppBottomTabsNavigator() {
         options={{
           tabBarLabel: '项目',
           title: 'Project',
-          headerShown: true,
+          headerShown: false,
         }}
       />
       <Bottom.Screen
