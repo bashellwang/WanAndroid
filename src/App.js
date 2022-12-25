@@ -7,6 +7,7 @@ import Themes from './foundation/constant/Theme';
 import DebugPage from './debug/DebugPage';
 import TopArticlesDemoPage from './debug/TopArticlesDemoPage';
 import {RouterConst} from './foundation/constant/RouterConst';
+import NavigationPage from './page/resource/NavigationPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,13 @@ export default function App() {
             component={HomePage}
             options={{
               headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name={RouterConst.Pages.NavigationPage}
+            component={NavigationPage}
+            options={{
+              headerShown: true,
             }}
           />
           <Stack.Screen

@@ -60,7 +60,7 @@ export default function AppBottomTabsNavigator() {
         component={ResourcePage}
         options={{
           tabBarLabel: '资源',
-          title: 'Resource',
+          title: '资源',
           headerShown: true,
         }}
       />

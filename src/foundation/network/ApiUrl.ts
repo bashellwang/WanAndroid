@@ -119,4 +119,11 @@ export class ApiUrl {
   static getProjectList(pageId = 0) {
     return BASE_URL + '/article/listproject/' + pageId + '/json';
   }
+
+  /**
+   * 获取导航数据
+   */
+  static getWebNaviList() {
+    return BASE_URL + '/navi/json';
+  }
 }

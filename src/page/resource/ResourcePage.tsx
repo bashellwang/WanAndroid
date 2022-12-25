@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import NavigationPage from './NavigationPage';
 
-export default function ResourcePage() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>ResourcePage!</Text>
-    </View>
-  );
+export default function ResourcePage({navigation}) {
+  return <NavigationPage navigation={navigation} />;
+  // return (
+  //   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  //     <Text>ResourcePage!</Text>
+  //   </View>
+  // );
 }

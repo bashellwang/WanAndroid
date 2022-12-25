@@ -16,6 +16,7 @@
 // 写法二，export default, 使用的地方导入该文件
 // import Constants from './foundation/Constants';
 // Constants.Pages.WelcomePage
+
 export const RouterConst = {
   Pages: {
     HomePage: 'HomePage',
@@ -31,6 +32,7 @@ export const RouterConst = {
     ProjectPage: 'ProjectPage',
 
     ResourcePage: 'ResourcePage',
+    NavigationPage: 'NavigationPage',
 
     WebPage: 'WebPage',
   },
