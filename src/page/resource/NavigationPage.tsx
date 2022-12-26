@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {
   FlatList,
+  Platform,
   SectionList,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useEffect, useRef, useState} from 'react';
+import {PureComponent, useEffect, useRef, useState} from 'react';
 import LogUtil from '../../foundation/util/LogUtil';
 import HttpUtil from '../../foundation/util/HttpUtil';
 import {ApiUrl} from '../../foundation/network/ApiUrl';
@@ -24,7 +25,7 @@ const TAG = '[NavigationPage] ';
  * https://juejin.cn/post/7075971648343506975
  * https://blog.csdn.net/weixin_46025371/article/details/122517795
  */
-export default function NavigationPage({navigation}) {
+export default function NavigationPage({navigation}): PureComponent {
   const FLATLIST_ITEM_HEIGHT = 40;
   const FLATLIST_DIVIDER_HEIGHT = 1;
   const SECTION_LIST_DIVIDER_HEIGHT = 1;
@@ -46,29 +47,27 @@ export default function NavigationPage({navigation}) {
         <FlatList
           ref={flatListRef}
           data={allData}
-          renderItem={data => _renderFlatListItem(data.index, data.item)}
+          renderItem={_renderFlatListItem}
           keyExtractor={item => item.cid}
           // 隐藏垂直滚动条
           showsVerticalScrollIndicator={false}
+          removeClippedSubviews={Platform.OS === 'android'}
+          getItemLayout={(data, index) => ({
+            length: FLATLIST_ITEM_HEIGHT,
+            offset: FLATLIST_ITEM_HEIGHT * index,
+            index,
+          })}
         />
       </View>
       <View style={{flex: 2.5}}>
         <SectionList
           ref={sectionListRef}
           sections={allData}
-          renderItem={data => _renderSectionListItem(data.index, data.item)}
-          renderSectionHeader={({section: {name}}) =>
-            _renderSectionHeader(name)
-          }
+          renderItem={_renderSectionListItem}
+          renderSectionHeader={_renderSectionHeader}
           keyExtractor={item => item.id}
-          onViewableItemsChanged={info => {
-            sectionListOnViewableItemsChanged(info);
-          }}
-          onScrollToIndexFailed={() => ({
-            index: 0,
-            highestMeasuredFrameIndex: 0,
-            averageItemLength: SECTION_LIST_ITEM_HEIGHT,
-          })}
+          onViewableItemsChanged={_sectionListOnViewableItemsChanged}
+          onScrollToIndexFailed={_onScrollToIndexFailed}
           // 隐藏垂直滚动条
           showsVerticalScrollIndicator={false}
         />
@@ -79,7 +78,7 @@ export default function NavigationPage({navigation}) {
   /**
    * 在 section 列表滑动时的逻辑
    */
-  function sectionListOnViewableItemsChanged(info) {
+  function _sectionListOnViewableItemsChanged(info) {
     let firstViewableItem = info?.viewableItems[0];
     if (firstViewableItem) {
       let id = firstViewableItem.section.cid;
@@ -97,10 +96,18 @@ export default function NavigationPage({navigation}) {
     }
   }
 
+  function _onScrollToIndexFailed() {
+    return {
+      index: selectedIndex,
+      highestMeasuredFrameIndex: 0,
+      averageItemLength: SECTION_LIST_ITEM_HEIGHT,
+    };
+  }
+
   /**
    * 渲染 flat 列表 item
    */
-  function _renderFlatListItem(index, item) {
+  function _renderFlatListItem({index, item}) {
     return (
       <TouchableOpacity
         onPress={() => {
@@ -113,13 +120,15 @@ export default function NavigationPage({navigation}) {
           LogUtil.info({tag: TAG}, 'selectedIndex: ' + index);
           // 右侧列表滑动,https://reactnative.cn/docs/sectionlist#scrolltolocation
           LogUtil.info({tag: TAG}, 'allData.length: ' + allData.length);
-          sectionListRef.current.scrollToLocation({
-            animated: true,
-            itemIndex: 0,
-            sectionIndex: index < allData.length ? index : allData.length - 1,
-            viewPosition: 0,
+          requestAnimationFrame(() => {
+            setSelectedIndex(index);
+            sectionListRef.current.scrollToLocation({
+              animated: true,
+              itemIndex: 0,
+              sectionIndex: index < allData.length ? index : allData.length - 1,
+              viewPosition: 0,
+            });
           });
-          setSelectedIndex(index);
         }}>
         <View
           style={{
@@ -146,7 +155,7 @@ export default function NavigationPage({navigation}) {
   /**
    * 渲染 section 列表 item
    */
-  function _renderSectionListItem(index, item) {
+  function _renderSectionListItem({index, item}) {
     return (
       <TouchableOpacity
         style={{marginBottom: 1}}
@@ -170,7 +179,7 @@ export default function NavigationPage({navigation}) {
   /**
    * 渲染 section 列表头
    */
-  function _renderSectionHeader(title: string) {
+  function _renderSectionHeader({section: {name}}) {
     return (
       <View
         style={{
@@ -185,7 +194,7 @@ export default function NavigationPage({navigation}) {
             fontWeight: 'bold',
             color: Color.green,
           }}>
-          {title}
+          {name}
         </Text>
       </View>
     );

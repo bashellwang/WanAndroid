@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {PureComponent} from 'react';
 import {ArticleInfo} from '../model/bean/ArticleInfo';
 import {View, StyleSheet, Text} from 'react-native';
 
@@ -15,7 +15,7 @@ interface SimpleArticleInfoCardProps {
 
 export default function SimpleArticleInfoCard(
   props: SimpleArticleInfoCardProps,
-): FC {
+): PureComponent {
   let article: ArticleInfo = props.item as ArticleInfo;
   return (
     <View style={pageStyle.container}>

@@ -91,6 +91,10 @@ https://www.jianshu.com/p/89df53f91edd
 - 手机上摇一摇
 
 ### RN 布局样式
-https://reactnative.cn/docs/flexbox
-https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+- https://reactnative.cn/docs/flexbox
+- https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+
+### RN 性能优化
+- https://reactnative.cn/docs/performance
+- https://reactnative.cn/docs/optimizing-flatlist-configuration
 
