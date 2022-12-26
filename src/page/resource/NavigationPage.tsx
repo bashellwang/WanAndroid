@@ -48,6 +48,8 @@ export default function NavigationPage({navigation}) {
           data={allData}
           renderItem={data => _renderFlatListItem(data.index, data.item)}
           keyExtractor={item => item.cid}
+          // 隐藏垂直滚动条
+          showsVerticalScrollIndicator={false}
         />
       </View>
       <View style={{flex: 2.5}}>
@@ -67,6 +69,8 @@ export default function NavigationPage({navigation}) {
             highestMeasuredFrameIndex: 0,
             averageItemLength: SECTION_LIST_ITEM_HEIGHT,
           })}
+          // 隐藏垂直滚动条
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -83,13 +87,13 @@ export default function NavigationPage({navigation}) {
         return id === item.cid;
       });
 
-      // if (selectedIndex !== index) {
-      // setSelectedIndex(index);
-      flatListRef.current.scrollToOffset({
-        animated: true,
-        offset: index * FLATLIST_ITEM_HEIGHT,
-      });
-      // }
+      if (selectedIndex !== index) {
+        flatListRef.current.scrollToOffset({
+          animated: true,
+          offset: index * FLATLIST_ITEM_HEIGHT,
+        });
+        setSelectedIndex(index);
+      }
     }
   }
 
@@ -107,7 +111,6 @@ export default function NavigationPage({navigation}) {
           // });
 
           LogUtil.info({tag: TAG}, 'selectedIndex: ' + index);
-          // setSelectedIndex(index);
           // 右侧列表滑动,https://reactnative.cn/docs/sectionlist#scrolltolocation
           LogUtil.info({tag: TAG}, 'allData.length: ' + allData.length);
           sectionListRef.current.scrollToLocation({
@@ -116,16 +119,21 @@ export default function NavigationPage({navigation}) {
             sectionIndex: index < allData.length ? index : allData.length - 1,
             viewPosition: 0,
           });
+          setSelectedIndex(index);
         }}>
         <View
           style={{
             justifyContent: 'center',
             alignItems: 'center',
             height: FLATLIST_ITEM_HEIGHT,
-            backgroundColor: Color.transparent,
+            backgroundColor:
+              selectedIndex === index ? Color.green : Color.transparent,
           }}>
           <Text
-            style={{fontSize: 15, color: Color.black}}
+            style={{
+              fontSize: 15,
+              color: selectedIndex === index ? Color.white : Color.black,
+            }}
             numberOfLines={1}
             ellipsizeMode={'tail'}>
             {item.name}
@@ -169,13 +177,13 @@ export default function NavigationPage({navigation}) {
           justifyContent: 'center',
           height: FLATLIST_ITEM_HEIGHT,
           paddingLeft: 5,
-          backgroundColor: 'white',
+          backgroundColor: Color.white,
         }}>
         <Text
           style={{
             fontSize: 15,
             fontWeight: 'bold',
-            color: 'green',
+            color: Color.green,
           }}>
           {title}
         </Text>

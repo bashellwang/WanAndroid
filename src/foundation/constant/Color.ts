@@ -2,6 +2,7 @@ export default {
   black: '#000000',
   white: '#FFFFFF',
   transparent: 'transparent',
+  green: 'green',
 
   F4F4F4: '#F4F4F4',
   FFFFFF: '#FFFFFF',

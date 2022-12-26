@@ -40,6 +40,7 @@ export default function GeneralFlatList(props: GeneralFlatListProps): React.FC {
   return (
     <View style={style.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         ref={flatList => {
           this._flatList = flatList;
         }}
