@@ -70,7 +70,7 @@ export default function AppBottomTabsNavigator() {
         options={{
           tabBarLabel: '我',
           title: 'Me',
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </Bottom.Navigator>
