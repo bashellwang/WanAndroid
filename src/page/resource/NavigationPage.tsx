@@ -86,13 +86,13 @@ export default function NavigationPage({navigation}): PureComponent {
         return id === item.cid;
       });
 
-      if (selectedIndex !== index) {
-        flatListRef.current.scrollToOffset({
-          animated: true,
-          offset: index * FLATLIST_ITEM_HEIGHT,
-        });
-        setSelectedIndex(index);
-      }
+      // if (selectedIndex !== index) {
+      // flatListRef.current.scrollToOffset({
+      //   animated: true,
+      //   offset: index * FLATLIST_ITEM_HEIGHT,
+      // });
+      // setSelectedIndex(index);
+      // }
     }
   }
 
